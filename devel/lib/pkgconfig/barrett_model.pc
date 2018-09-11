@@ -1,0 +1,8 @@
+prefix=/home/cjs/ros_workspaces/wam_sim/devel
+
+Name: barrett_model
+Description: Description of barrett_model
+Version: 0.5.1
+Cflags: 
+Libs: -L/home/cjs/ros_workspaces/wam_sim/devel/lib 
+Requires: 

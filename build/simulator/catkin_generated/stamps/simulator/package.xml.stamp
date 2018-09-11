@@ -1,0 +1,27 @@
+<package>
+
+  <name>simulator</name>
+  <version>0.1.0</version>
+  <description>
+     Simulated teleop of WAM using RViz
+  </description>
+  <author email="cjs@ualberta.ca">Connor Stephens</author>
+  <maintainer email="cjs@ualberta.ca">Connor Stephens</maintainer>
+
+  <license>BSD</license>
+
+  <run_depend>moveit_ros_move_group</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>moveit_planners_ompl</run_depend>
+  <run_depend>moveit_ros_visualization</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>xacro</run_depend>
+  <build_depend>barrett_model</build_depend>
+  <run_depend>barrett_model</run_depend>
+  <build_depend>barrett_moveit</build_depend>
+  <run_depend>barrett_moveit</run_depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+</package>

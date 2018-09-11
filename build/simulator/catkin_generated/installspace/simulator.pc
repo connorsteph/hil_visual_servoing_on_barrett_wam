@@ -1,0 +1,8 @@
+prefix=/home/cjs/ros_workspaces/wam_sim/install
+
+Name: simulator
+Description: Description of simulator
+Version: 0.1.0
+Cflags: -I/home/cjs/ros_workspaces/wam_sim/install/include
+Libs: -L/home/cjs/ros_workspaces/wam_sim/install/lib 
+Requires: message_runtime

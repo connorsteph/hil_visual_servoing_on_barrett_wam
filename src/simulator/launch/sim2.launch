@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="simulator_v2" pkg="simulator" type="simulator_v2" respawn="false" output="screen">
+  </node>
+
+</launch>

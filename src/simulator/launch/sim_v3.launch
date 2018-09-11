@@ -1,0 +1,11 @@
+<launch>
+
+  <node name="simulator" pkg="simulator" type="simulator" respawn="false" output="screen">
+  </node>
+  <!-- joy node -->
+  <node respawn="true" pkg="joy"
+        type="joy_node" name="joy_node" >
+  <param name="deadzone" value="0.15" />
+  <param name="autorepeat_rate" value="30.0"/>
+  </node>
+</launch>

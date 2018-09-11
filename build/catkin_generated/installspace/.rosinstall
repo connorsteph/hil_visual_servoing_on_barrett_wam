@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/cjs/ros_workspaces/wam_sim/install/setup.sh
