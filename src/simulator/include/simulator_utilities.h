@@ -84,7 +84,7 @@ Eigen::Quaterniond inwards_normal_to_quaternion(const Eigen::Vector3d &spherical
     return quaternion;
 }
 
-geometry_msgs::Pose get_pose(const Eigen::Vector3d &object_position,const Eigen::Vector3d &tool_position)
+geometry_msgs::Pose get_pose(const Eigen::Vector3d &object_position, const Eigen::Vector3d &tool_position)
 {
     geometry_msgs::Pose pose_msg;
     Eigen::Vector3d rel_position = tool_position - object_position;

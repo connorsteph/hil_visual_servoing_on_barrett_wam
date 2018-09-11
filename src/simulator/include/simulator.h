@@ -44,8 +44,8 @@ class Simulator
     const int total_joints = 7;
     std::vector<bool> active_buttons_map = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0};
     std::vector<bool> active_axes_map = {1, 1, 1, 1, 0, 0};
-    Eigen::Vector3d object_position = {0.7, 0.0, 1.3};
-    Eigen::Vector3d spherical_position{0.3, M_PI/6.0, M_PI}; // r, theta, phi
+    Eigen::Vector3d object_position = {0.8, 0.3, 1.2};
+    Eigen::Vector3d spherical_position{0.4, M_PI/6.0, M_PI}; // r, theta, phi
     Eigen::Matrix<double, 7, 1> current_joint_angles;
     // current_joint_angles = {0, 0, 0, 0, 0, 0 ,0};
     vector<double> goal_joint_angles;
