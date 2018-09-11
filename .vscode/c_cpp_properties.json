@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/froglake/reach_and_grasp_ws/devel/include",
+                "/home/froglake/irl_workspace/devel/include",
+                "/home/froglake/vs_workspace/devel/include",
+                "/opt/ros/indigo/include",
+                "/home/froglake/wam_sim_bak/src/simulator/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
