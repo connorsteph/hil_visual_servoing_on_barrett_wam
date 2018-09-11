@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cjs/ros_workspaces/wam_sim/src/simulator/src/simulator.cpp" "/home/cjs/ros_workspaces/wam_sim/build/simulator/CMakeFiles/simulator.dir/src/simulator.cpp.o"
+  "/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/src/simulator.cpp" "/home/cjs/ros_workspaces/wam_sim_bak/build/simulator/CMakeFiles/simulator.dir/src/simulator.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,8 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/cjs/ros_workspaces/wam_sim/devel/include"
-  "/home/cjs/ros_workspaces/wam_sim/src/simulator/include"
+  "/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include"
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/opt/ros/melodic/share/orocos_kdl/cmake/../../../include"

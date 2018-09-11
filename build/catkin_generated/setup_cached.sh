@@ -7,4 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/cjs/ros_workspaces/wam_sim/build"
+export PWD="/home/cjs/ros_workspaces/wam_sim_bak/build"
+export PYTHONPATH="/home/cjs/ros_workspaces/wam_sim/devel/lib/python2.7/dist-packages:/opt/ros/melodic/lib/python2.7/dist-packages"

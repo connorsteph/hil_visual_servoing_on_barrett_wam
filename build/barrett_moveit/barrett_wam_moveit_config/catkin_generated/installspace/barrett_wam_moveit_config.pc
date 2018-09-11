@@ -1,8 +1,8 @@
-prefix=/home/cjs/ros_workspaces/wam_sim/install
+prefix=/home/cjs/ros_workspaces/wam_sim_bak/install
 
 Name: barrett_wam_moveit_config
 Description: Description of barrett_wam_moveit_config
 Version: 0.3.1
 Cflags: 
-Libs: -L/home/cjs/ros_workspaces/wam_sim/install/lib 
+Libs: -L/home/cjs/ros_workspaces/wam_sim_bak/install/lib 
 Requires: 

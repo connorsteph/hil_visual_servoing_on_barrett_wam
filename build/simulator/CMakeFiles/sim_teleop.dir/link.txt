@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++11  -Wno-deprecated-declarations -Wno-ignored-attributes  -rdynamic CMakeFiles/sim_teleop.dir/src/sim_teleop.cpp.o  -o /home/cjs/ros_workspaces/wam_sim/devel/lib/simulator/sim_teleop 

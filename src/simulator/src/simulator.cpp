@@ -49,13 +49,12 @@ void Simulator::teleop_grasp()
             move_group.getCurrentState()->copyJointGroupPositions(joint_model_group, joints);
             // cout << "Translation: \n"
             //      << move_group.getCurrentState()->getGlobalLinkTransform("wam/wrist_palm_stump_link").translation() << "\n*****************" << endl;
-            cout << "Rotation: \n"
-                 << move_group.getCurrentState()->getGlobalLinkTransform("wam/wrist_palm_stump_link").rotation() << "\n*****************" << endl;
+            // cout << "Rotation: \n"
+            //      << move_group.getCurrentState()->getGlobalLinkTransform("wam/wrist_palm_stump_link").rotation() << "\n*****************" << endl;
             for (int i = 0; i < joints.size(); ++i)
             {
                 current_joint_angles[i] = joints[i];
             }
-            // cout << current_joint_angles << endl;
             c = teleop_grasp_step(); // sets global variable goal_joint_angles in sphere move
             move_group.setJointValueTarget(goal_joint_angles);
             move_group.plan(my_plan);

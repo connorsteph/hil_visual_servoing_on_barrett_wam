@@ -1,2 +1,2 @@
-set(simulator_MESSAGE_FILES "msg/Teleop.msg")
+set(simulator_MESSAGE_FILES "")
 set(simulator_SERVICE_FILES "")

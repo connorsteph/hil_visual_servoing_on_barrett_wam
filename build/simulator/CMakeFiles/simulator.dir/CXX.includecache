@@ -6,23 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/cjs/ros_workspaces/wam_sim/devel/include/simulator/Teleop.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/simulator.h
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include/simulator.h
 ros/ros.h
 -
 iostream
@@ -32,19 +16,13 @@ cmath
 Eigen/Dense
 -
 sensor_msgs/JointState.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/sensor_msgs/JointState.h
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include/sensor_msgs/JointState.h
 sensor_msgs/Joy.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/sensor_msgs/Joy.h
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include/sensor_msgs/Joy.h
 geometry_msgs/PoseStamped.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/geometry_msgs/PoseStamped.h
-geometry_msgs/Point.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/geometry_msgs/Point.h
-simulator/Teleop.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/simulator/Teleop.h
-geometry_msgs/PoseStamped.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/geometry_msgs/PoseStamped.h
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include/geometry_msgs/PoseStamped.h
 sensor_msgs/JointState.h
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/sensor_msgs/JointState.h
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include/sensor_msgs/JointState.h
 moveit/move_group_interface/move_group_interface.h
 -
 moveit/planning_scene_interface/planning_scene_interface.h
@@ -66,11 +44,11 @@ moveit_msgs/DisplayRobotState.h
 moveit_msgs/GetPositionIK.h
 -
 
-/home/cjs/ros_workspaces/wam_sim/src/simulator/include/simulator_utilities.h
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include/simulator_utilities.h
 simulator.h
 -
 
-/home/cjs/ros_workspaces/wam_sim/src/simulator/src/simulator.cpp
+/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/src/simulator.cpp
 simulator.h
 -
 simulator_utilities.h

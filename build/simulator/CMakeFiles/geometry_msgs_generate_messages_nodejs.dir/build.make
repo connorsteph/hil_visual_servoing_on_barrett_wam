@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cjs/ros_workspaces/wam_sim/src
+CMAKE_SOURCE_DIR = /home/cjs/ros_workspaces/wam_sim_bak/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cjs/ros_workspaces/wam_sim/build
+CMAKE_BINARY_DIR = /home/cjs/ros_workspaces/wam_sim_bak/build
 
 # Utility rule file for geometry_msgs_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build: geometry_
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 
 simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean:
-	cd /home/cjs/ros_workspaces/wam_sim/build/simulator && $(CMAKE_COMMAND) -P CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build/simulator && $(CMAKE_COMMAND) -P CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
 
 simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cjs/ros_workspaces/wam_sim/src /home/cjs/ros_workspaces/wam_sim/src/simulator /home/cjs/ros_workspaces/wam_sim/build /home/cjs/ros_workspaces/wam_sim/build/simulator /home/cjs/ros_workspaces/wam_sim/build/simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cjs/ros_workspaces/wam_sim_bak/src /home/cjs/ros_workspaces/wam_sim_bak/src/simulator /home/cjs/ros_workspaces/wam_sim_bak/build /home/cjs/ros_workspaces/wam_sim_bak/build/simulator /home/cjs/ros_workspaces/wam_sim_bak/build/simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend
 

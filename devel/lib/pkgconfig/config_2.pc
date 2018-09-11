@@ -1,8 +1,8 @@
-prefix=/home/cjs/ros_workspaces/wam_sim/devel
+prefix=/home/cjs/ros_workspaces/wam_sim_bak/devel
 
 Name: config_2
 Description: Description of config_2
 Version: 0.3.0
 Cflags: 
-Libs: -L/home/cjs/ros_workspaces/wam_sim/devel/lib 
+Libs: -L/home/cjs/ros_workspaces/wam_sim_bak/devel/lib 
 Requires: 

@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp
+Change Dir: /home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_11d12/fast"
-/usr/bin/make -f CMakeFiles/cmTC_11d12.dir/build.make CMakeFiles/cmTC_11d12.dir/build
-make[1]: Entering directory '/home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_11d12.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_11d12.dir/CheckSymbolExists.c.o   -c /home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_11d12
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_11d12.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_11d12.dir/CheckSymbolExists.c.o  -o cmTC_11d12 
-CMakeFiles/cmTC_11d12.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command:"/usr/bin/make" "cmTC_5de8d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5de8d.dir/build.make CMakeFiles/cmTC_5de8d.dir/build
+make[1]: Entering directory '/home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5de8d.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_5de8d.dir/CheckSymbolExists.c.o   -c /home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_5de8d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5de8d.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_5de8d.dir/CheckSymbolExists.c.o  -o cmTC_5de8d 
+CMakeFiles/cmTC_5de8d.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_11d12.dir/build.make:97: recipe for target 'cmTC_11d12' failed
-make[1]: *** [cmTC_11d12] Error 1
-make[1]: Leaving directory '/home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_11d12/fast' failed
-make: *** [cmTC_11d12/fast] Error 2
+CMakeFiles/cmTC_5de8d.dir/build.make:97: recipe for target 'cmTC_5de8d' failed
+make[1]: *** [cmTC_5de8d] Error 1
+make[1]: Leaving directory '/home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5de8d/fast' failed
+make: *** [cmTC_5de8d/fast] Error 2
 
-File /home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp
+Change Dir: /home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0280c/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0280c.dir/build.make CMakeFiles/cmTC_0280c.dir/build
-make[1]: Entering directory '/home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0280c.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_0280c.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_0280c
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0280c.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_0280c.dir/CheckFunctionExists.c.o  -o cmTC_0280c -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTC_5b531/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5b531.dir/build.make CMakeFiles/cmTC_5b531.dir/build
+make[1]: Entering directory '/home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5b531.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_5b531.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_5b531
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5b531.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_5b531.dir/CheckFunctionExists.c.o  -o cmTC_5b531 -lpthreads 
 /usr/bin/x86_64-linux-gnu-ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_0280c.dir/build.make:97: recipe for target 'cmTC_0280c' failed
-make[1]: *** [cmTC_0280c] Error 1
-make[1]: Leaving directory '/home/cjs/ros_workspaces/wam_sim/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_0280c/fast' failed
-make: *** [cmTC_0280c/fast] Error 2
+CMakeFiles/cmTC_5b531.dir/build.make:97: recipe for target 'cmTC_5b531' failed
+make[1]: *** [cmTC_5b531] Error 1
+make[1]: Leaving directory '/home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5b531/fast' failed
+make: *** [cmTC_5b531/fast] Error 2
 
 

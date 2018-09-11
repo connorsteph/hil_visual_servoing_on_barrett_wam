@@ -6,10 +6,8 @@
 #include <Eigen/Dense>
 #include "sensor_msgs/JointState.h"
 #include "sensor_msgs/Joy.h"
-#include "geometry_msgs/PoseStamped.h"
-#include "geometry_msgs/Point.h"
-#include "simulator/Teleop.h"
-
+// #include "geometry_msgs/PoseStamped.h"
+// #include "geometry_msgs/Point.h"
 #include "geometry_msgs/PoseStamped.h"
 #include "sensor_msgs/JointState.h"
 

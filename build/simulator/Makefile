@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cjs/ros_workspaces/wam_sim/src
+CMAKE_SOURCE_DIR = /home/cjs/ros_workspaces/wam_sim_bak/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cjs/ros_workspaces/wam_sim/build
+CMAKE_BINARY_DIR = /home/cjs/ros_workspaces/wam_sim_bak/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -92,15 +92,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
 
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
+# Special rule for the target test
+test/fast: test
 
-.PHONY : list_install_components/fast
+.PHONY : test/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -113,17 +114,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -135,16 +125,26 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # The main all target
 all: cmake_check_build_system
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/cjs/ros_workspaces/wam_sim/build/CMakeFiles /home/cjs/ros_workspaces/wam_sim/build/simulator/CMakeFiles/progress.marks
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cjs/ros_workspaces/wam_sim/build/CMakeFiles 0
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles /home/cjs/ros_workspaces/wam_sim_bak/build/simulator/CMakeFiles/progress.marks
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cjs/ros_workspaces/wam_sim_bak/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/clean
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/preinstall
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/preinstall
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ visualization_msgs_generate_messages_nodejs: simulator/CMakeFiles/visualization_
 
 # fast build rule for target.
 visualization_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
 .PHONY : visualization_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ std_msgs_generate_messages_cpp: simulator/CMakeFiles/std_msgs_generate_messages_
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ moveit_msgs_generate_messages_lisp: simulator/CMakeFiles/moveit_msgs_generate_me
 
 # fast build rule for target.
 moveit_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_lisp.dir/build
 .PHONY : moveit_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ visualization_msgs_generate_messages_py: simulator/CMakeFiles/visualization_msgs
 
 # fast build rule for target.
 visualization_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
 .PHONY : visualization_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ visualization_msgs_generate_messages_eus: simulator/CMakeFiles/visualization_msg
 
 # fast build rule for target.
 visualization_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
 .PHONY : visualization_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ visualization_msgs_generate_messages_cpp: simulator/CMakeFiles/visualization_msg
 
 # fast build rule for target.
 visualization_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
 .PHONY : visualization_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ object_recognition_msgs_generate_messages_nodejs: simulator/CMakeFiles/object_re
 
 # fast build rule for target.
 object_recognition_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_nodejs.dir/build
 .PHONY : object_recognition_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ moveit_msgs_generate_messages_eus: simulator/CMakeFiles/moveit_msgs_generate_mes
 
 # fast build rule for target.
 moveit_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_eus.dir/build
 .PHONY : moveit_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ geometry_msgs_generate_messages_py: simulator/CMakeFiles/geometry_msgs_generate_
 
 # fast build rule for target.
 geometry_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
 .PHONY : geometry_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ geometry_msgs_generate_messages_lisp: simulator/CMakeFiles/geometry_msgs_generat
 
 # fast build rule for target.
 geometry_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
 .PHONY : geometry_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ geometry_msgs_generate_messages_cpp: simulator/CMakeFiles/geometry_msgs_generate
 
 # fast build rule for target.
 geometry_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
 .PHONY : geometry_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ std_msgs_generate_messages_py: simulator/CMakeFiles/std_msgs_generate_messages_p
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ shape_msgs_generate_messages_nodejs: simulator/CMakeFiles/shape_msgs_generate_me
 
 # fast build rule for target.
 shape_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_nodejs.dir/build
 .PHONY : shape_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_gennodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_gennodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_gennodejs.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ simulator_gennodejs: simulator/CMakeFiles/simulator_gennodejs.dir/rule
 
 # fast build rule for target.
 simulator_gennodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_gennodejs.dir/build.make simulator/CMakeFiles/simulator_gennodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_gennodejs.dir/build.make simulator/CMakeFiles/simulator_gennodejs.dir/build
 .PHONY : simulator_gennodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ shape_msgs_generate_messages_lisp: simulator/CMakeFiles/shape_msgs_generate_mess
 
 # fast build rule for target.
 shape_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_lisp.dir/build
 .PHONY : shape_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -404,12 +404,12 @@ geometry_msgs_generate_messages_eus: simulator/CMakeFiles/geometry_msgs_generate
 
 # fast build rule for target.
 geometry_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/rule
 
 # Convenience name for target.
@@ -419,12 +419,12 @@ moveit_ros_planning_gencfg: simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/
 
 # fast build rule for target.
 moveit_ros_planning_gencfg/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/build.make simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/build.make simulator/CMakeFiles/moveit_ros_planning_gencfg.dir/build
 .PHONY : moveit_ros_planning_gencfg/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/roscpp_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -434,12 +434,12 @@ roscpp_generate_messages_py: simulator/CMakeFiles/roscpp_generate_messages_py.di
 
 # fast build rule for target.
 roscpp_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_py.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_py.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -449,27 +449,12 @@ trajectory_msgs_generate_messages_eus: simulator/CMakeFiles/trajectory_msgs_gene
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
 .PHONY : trajectory_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-simulator/CMakeFiles/simulator_v2.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_v2.dir/rule
-.PHONY : simulator/CMakeFiles/simulator_v2.dir/rule
-
-# Convenience name for target.
-simulator_v2: simulator/CMakeFiles/simulator_v2.dir/rule
-
-.PHONY : simulator_v2
-
-# fast build rule for target.
-simulator_v2/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_v2.dir/build.make simulator/CMakeFiles/simulator_v2.dir/build
-.PHONY : simulator_v2/fast
-
-# Convenience name for target.
 simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -479,12 +464,12 @@ shape_msgs_generate_messages_eus: simulator/CMakeFiles/shape_msgs_generate_messa
 
 # fast build rule for target.
 shape_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_eus.dir/build
 .PHONY : shape_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -494,12 +479,12 @@ shape_msgs_generate_messages_cpp: simulator/CMakeFiles/shape_msgs_generate_messa
 
 # fast build rule for target.
 shape_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_cpp.dir/build
 .PHONY : shape_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -509,12 +494,12 @@ simulator_generate_messages_py: simulator/CMakeFiles/simulator_generate_messages
 
 # fast build rule for target.
 simulator_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_py.dir/build.make simulator/CMakeFiles/simulator_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_py.dir/build.make simulator/CMakeFiles/simulator_generate_messages_py.dir/build
 .PHONY : simulator_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -524,12 +509,12 @@ rosgraph_msgs_generate_messages_cpp: simulator/CMakeFiles/rosgraph_msgs_generate
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -539,12 +524,12 @@ roscpp_generate_messages_nodejs: simulator/CMakeFiles/roscpp_generate_messages_n
 
 # fast build rule for target.
 roscpp_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -554,12 +539,12 @@ std_msgs_generate_messages_lisp: simulator/CMakeFiles/std_msgs_generate_messages
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -569,12 +554,12 @@ roscpp_generate_messages_cpp: simulator/CMakeFiles/roscpp_generate_messages_cpp.
 
 # fast build rule for target.
 roscpp_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -584,12 +569,12 @@ moveit_msgs_generate_messages_nodejs: simulator/CMakeFiles/moveit_msgs_generate_
 
 # fast build rule for target.
 moveit_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_nodejs.dir/build
 .PHONY : moveit_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -599,12 +584,12 @@ sensor_msgs_generate_messages_nodejs: simulator/CMakeFiles/sensor_msgs_generate_
 
 # fast build rule for target.
 sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -614,12 +599,12 @@ object_recognition_msgs_generate_messages_eus: simulator/CMakeFiles/object_recog
 
 # fast build rule for target.
 object_recognition_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_eus.dir/build
 .PHONY : object_recognition_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -629,12 +614,12 @@ octomap_msgs_generate_messages_eus: simulator/CMakeFiles/octomap_msgs_generate_m
 
 # fast build rule for target.
 octomap_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_eus.dir/build
 .PHONY : octomap_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -644,12 +629,12 @@ actionlib_msgs_generate_messages_cpp: simulator/CMakeFiles/actionlib_msgs_genera
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/rule
 
 # Convenience name for target.
@@ -659,12 +644,12 @@ moveit_ros_manipulation_gencfg: simulator/CMakeFiles/moveit_ros_manipulation_gen
 
 # fast build rule for target.
 moveit_ros_manipulation_gencfg/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/build.make simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/build.make simulator/CMakeFiles/moveit_ros_manipulation_gencfg.dir/build
 .PHONY : moveit_ros_manipulation_gencfg/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_genpy.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_genpy.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_genpy.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_genpy.dir/rule
 
 # Convenience name for target.
@@ -674,12 +659,12 @@ simulator_genpy: simulator/CMakeFiles/simulator_genpy.dir/rule
 
 # fast build rule for target.
 simulator_genpy/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_genpy.dir/build.make simulator/CMakeFiles/simulator_genpy.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_genpy.dir/build.make simulator/CMakeFiles/simulator_genpy.dir/build
 .PHONY : simulator_genpy/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -689,12 +674,12 @@ moveit_msgs_generate_messages_py: simulator/CMakeFiles/moveit_msgs_generate_mess
 
 # fast build rule for target.
 moveit_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_py.dir/build
 .PHONY : moveit_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator.dir/rule
 .PHONY : simulator/CMakeFiles/simulator.dir/rule
 
 # Convenience name for target.
@@ -704,12 +689,12 @@ simulator: simulator/CMakeFiles/simulator.dir/rule
 
 # fast build rule for target.
 simulator/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/build
 .PHONY : simulator/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -719,12 +704,12 @@ rosgraph_msgs_generate_messages_lisp: simulator/CMakeFiles/rosgraph_msgs_generat
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -734,42 +719,12 @@ rosgraph_msgs_generate_messages_nodejs: simulator/CMakeFiles/rosgraph_msgs_gener
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-.PHONY : simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_lisp: simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : visualization_msgs_generate_messages_lisp
-
-# fast build rule for target.
-visualization_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
-.PHONY : visualization_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
 simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -779,12 +734,12 @@ trajectory_msgs_generate_messages_py: simulator/CMakeFiles/trajectory_msgs_gener
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
 .PHONY : trajectory_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -794,12 +749,12 @@ moveit_msgs_generate_messages_cpp: simulator/CMakeFiles/moveit_msgs_generate_mes
 
 # fast build rule for target.
 moveit_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/moveit_msgs_generate_messages_cpp.dir/build
 .PHONY : moveit_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -809,12 +764,12 @@ std_msgs_generate_messages_nodejs: simulator/CMakeFiles/std_msgs_generate_messag
 
 # fast build rule for target.
 std_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -824,12 +779,12 @@ roscpp_generate_messages_eus: simulator/CMakeFiles/roscpp_generate_messages_eus.
 
 # fast build rule for target.
 roscpp_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_eus.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_eus.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_eus.dir/build
 .PHONY : roscpp_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -839,12 +794,12 @@ rosgraph_msgs_generate_messages_py: simulator/CMakeFiles/rosgraph_msgs_generate_
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -854,12 +809,12 @@ actionlib_msgs_generate_messages_eus: simulator/CMakeFiles/actionlib_msgs_genera
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
 .PHONY : actionlib_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -869,12 +824,12 @@ octomap_msgs_generate_messages_cpp: simulator/CMakeFiles/octomap_msgs_generate_m
 
 # fast build rule for target.
 octomap_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_cpp.dir/build
 .PHONY : octomap_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -884,12 +839,12 @@ actionlib_msgs_generate_messages_lisp: simulator/CMakeFiles/actionlib_msgs_gener
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
 .PHONY : actionlib_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_generate_messages.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -899,12 +854,12 @@ simulator_generate_messages: simulator/CMakeFiles/simulator_generate_messages.di
 
 # fast build rule for target.
 simulator_generate_messages/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages.dir/build.make simulator/CMakeFiles/simulator_generate_messages.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages.dir/build.make simulator/CMakeFiles/simulator_generate_messages.dir/build
 .PHONY : simulator_generate_messages/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -914,12 +869,12 @@ actionlib_msgs_generate_messages_nodejs: simulator/CMakeFiles/actionlib_msgs_gen
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -929,12 +884,12 @@ actionlib_msgs_generate_messages_py: simulator/CMakeFiles/actionlib_msgs_generat
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -944,12 +899,12 @@ sensor_msgs_generate_messages_cpp: simulator/CMakeFiles/sensor_msgs_generate_mes
 
 # fast build rule for target.
 sensor_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
 .PHONY : sensor_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -959,12 +914,12 @@ sensor_msgs_generate_messages_eus: simulator/CMakeFiles/sensor_msgs_generate_mes
 
 # fast build rule for target.
 sensor_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
 .PHONY : sensor_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -974,12 +929,12 @@ geometry_msgs_generate_messages_nodejs: simulator/CMakeFiles/geometry_msgs_gener
 
 # fast build rule for target.
 geometry_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -989,12 +944,12 @@ object_recognition_msgs_generate_messages_lisp: simulator/CMakeFiles/object_reco
 
 # fast build rule for target.
 object_recognition_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_lisp.dir/build
 .PHONY : object_recognition_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1004,12 +959,12 @@ simulator_generate_messages_eus: simulator/CMakeFiles/simulator_generate_message
 
 # fast build rule for target.
 simulator_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_eus.dir/build.make simulator/CMakeFiles/simulator_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_eus.dir/build.make simulator/CMakeFiles/simulator_generate_messages_eus.dir/build
 .PHONY : simulator_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1019,12 +974,12 @@ sensor_msgs_generate_messages_py: simulator/CMakeFiles/sensor_msgs_generate_mess
 
 # fast build rule for target.
 sensor_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 .PHONY : sensor_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/rule
 .PHONY : simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1034,12 +989,12 @@ shape_msgs_generate_messages_py: simulator/CMakeFiles/shape_msgs_generate_messag
 
 # fast build rule for target.
 shape_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/shape_msgs_generate_messages_py.dir/build
 .PHONY : shape_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1049,12 +1004,12 @@ trajectory_msgs_generate_messages_cpp: simulator/CMakeFiles/trajectory_msgs_gene
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
 .PHONY : trajectory_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1064,12 +1019,12 @@ trajectory_msgs_generate_messages_lisp: simulator/CMakeFiles/trajectory_msgs_gen
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
 .PHONY : trajectory_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1079,12 +1034,12 @@ trajectory_msgs_generate_messages_nodejs: simulator/CMakeFiles/trajectory_msgs_g
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
 .PHONY : trajectory_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1094,12 +1049,12 @@ sensor_msgs_generate_messages_lisp: simulator/CMakeFiles/sensor_msgs_generate_me
 
 # fast build rule for target.
 sensor_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
 .PHONY : sensor_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_genlisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_genlisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_genlisp.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_genlisp.dir/rule
 
 # Convenience name for target.
@@ -1109,12 +1064,12 @@ simulator_genlisp: simulator/CMakeFiles/simulator_genlisp.dir/rule
 
 # fast build rule for target.
 simulator_genlisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_genlisp.dir/build.make simulator/CMakeFiles/simulator_genlisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_genlisp.dir/build.make simulator/CMakeFiles/simulator_genlisp.dir/build
 .PHONY : simulator_genlisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 .PHONY : simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1124,12 +1079,12 @@ rosgraph_msgs_generate_messages_eus: simulator/CMakeFiles/rosgraph_msgs_generate
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1139,57 +1094,12 @@ object_recognition_msgs_generate_messages_cpp: simulator/CMakeFiles/object_recog
 
 # fast build rule for target.
 object_recognition_msgs_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_cpp.dir/build
 .PHONY : object_recognition_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
-simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
-.PHONY : simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-object_recognition_msgs_generate_messages_py: simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
-
-.PHONY : object_recognition_msgs_generate_messages_py
-
-# fast build rule for target.
-object_recognition_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/build
-.PHONY : object_recognition_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
-.PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-octomap_msgs_generate_messages_nodejs: simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : octomap_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-octomap_msgs_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/build
-.PHONY : octomap_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
-.PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-octomap_msgs_generate_messages_py: simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
-
-.PHONY : octomap_msgs_generate_messages_py
-
-# fast build rule for target.
-octomap_msgs_generate_messages_py/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/build
-.PHONY : octomap_msgs_generate_messages_py/fast
-
-# Convenience name for target.
 simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1199,12 +1109,12 @@ roscpp_generate_messages_lisp: simulator/CMakeFiles/roscpp_generate_messages_lis
 
 # fast build rule for target.
 roscpp_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1214,27 +1124,57 @@ octomap_msgs_generate_messages_lisp: simulator/CMakeFiles/octomap_msgs_generate_
 
 # fast build rule for target.
 octomap_msgs_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_lisp.dir/build
 .PHONY : octomap_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-simulator/CMakeFiles/_simulator_generate_messages_check_deps_Teleop.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/_simulator_generate_messages_check_deps_Teleop.dir/rule
-.PHONY : simulator/CMakeFiles/_simulator_generate_messages_check_deps_Teleop.dir/rule
+simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
+.PHONY : simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-_simulator_generate_messages_check_deps_Teleop: simulator/CMakeFiles/_simulator_generate_messages_check_deps_Teleop.dir/rule
+object_recognition_msgs_generate_messages_py: simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/rule
 
-.PHONY : _simulator_generate_messages_check_deps_Teleop
+.PHONY : object_recognition_msgs_generate_messages_py
 
 # fast build rule for target.
-_simulator_generate_messages_check_deps_Teleop/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_Teleop.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_Teleop.dir/build
-.PHONY : _simulator_generate_messages_check_deps_Teleop/fast
+object_recognition_msgs_generate_messages_py/fast:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/object_recognition_msgs_generate_messages_py.dir/build
+.PHONY : object_recognition_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
+.PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_nodejs: simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+octomap_msgs_generate_messages_nodejs/fast:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_nodejs.dir/build
+.PHONY : octomap_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
+.PHONY : simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+octomap_msgs_generate_messages_py: simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/rule
+
+.PHONY : octomap_msgs_generate_messages_py
+
+# fast build rule for target.
+octomap_msgs_generate_messages_py/fast:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/octomap_msgs_generate_messages_py.dir/build
+.PHONY : octomap_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_generate_messages_cpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_cpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1244,12 +1184,12 @@ simulator_generate_messages_cpp: simulator/CMakeFiles/simulator_generate_message
 
 # fast build rule for target.
 simulator_generate_messages_cpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build
 .PHONY : simulator_generate_messages_cpp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_gencpp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_gencpp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_gencpp.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_gencpp.dir/rule
 
 # Convenience name for target.
@@ -1259,12 +1199,42 @@ simulator_gencpp: simulator/CMakeFiles/simulator_gencpp.dir/rule
 
 # fast build rule for target.
 simulator_gencpp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_gencpp.dir/build.make simulator/CMakeFiles/simulator_gencpp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_gencpp.dir/build.make simulator/CMakeFiles/simulator_gencpp.dir/build
 .PHONY : simulator_gencpp/fast
 
 # Convenience name for target.
+simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+.PHONY : simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_lisp: simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_lisp
+
+# fast build rule for target.
+visualization_msgs_generate_messages_lisp/fast:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
+.PHONY : visualization_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+.PHONY : simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_eus: simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+.PHONY : std_msgs_generate_messages_eus
+
+# fast build rule for target.
+std_msgs_generate_messages_eus/fast:
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+.PHONY : std_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
 simulator/CMakeFiles/simulator_generate_messages_lisp.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_lisp.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_lisp.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1274,12 +1244,12 @@ simulator_generate_messages_lisp: simulator/CMakeFiles/simulator_generate_messag
 
 # fast build rule for target.
 simulator_generate_messages_lisp/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build
 .PHONY : simulator_generate_messages_lisp/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_geneus.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_geneus.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_geneus.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_geneus.dir/rule
 
 # Convenience name for target.
@@ -1289,12 +1259,12 @@ simulator_geneus: simulator/CMakeFiles/simulator_geneus.dir/rule
 
 # fast build rule for target.
 simulator_geneus/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_geneus.dir/build.make simulator/CMakeFiles/simulator_geneus.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_geneus.dir/build.make simulator/CMakeFiles/simulator_geneus.dir/build
 .PHONY : simulator_geneus/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/rule
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/rule
 .PHONY : simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1304,50 +1274,8 @@ simulator_generate_messages_nodejs: simulator/CMakeFiles/simulator_generate_mess
 
 # fast build rule for target.
 simulator_generate_messages_nodejs/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/build
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/build.make simulator/CMakeFiles/simulator_generate_messages_nodejs.dir/build
 .PHONY : simulator_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simulator/CMakeFiles/sim_teleop.dir/rule:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/sim_teleop.dir/rule
-.PHONY : simulator/CMakeFiles/sim_teleop.dir/rule
-
-# Convenience name for target.
-sim_teleop: simulator/CMakeFiles/sim_teleop.dir/rule
-
-.PHONY : sim_teleop
-
-# fast build rule for target.
-sim_teleop/fast:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sim_teleop.dir/build.make simulator/CMakeFiles/sim_teleop.dir/build
-.PHONY : sim_teleop/fast
-
-src/sim_teleop.o: src/sim_teleop.cpp.o
-
-.PHONY : src/sim_teleop.o
-
-# target to build an object file
-src/sim_teleop.cpp.o:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sim_teleop.dir/build.make simulator/CMakeFiles/sim_teleop.dir/src/sim_teleop.cpp.o
-.PHONY : src/sim_teleop.cpp.o
-
-src/sim_teleop.i: src/sim_teleop.cpp.i
-
-.PHONY : src/sim_teleop.i
-
-# target to preprocess a source file
-src/sim_teleop.cpp.i:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sim_teleop.dir/build.make simulator/CMakeFiles/sim_teleop.dir/src/sim_teleop.cpp.i
-.PHONY : src/sim_teleop.cpp.i
-
-src/sim_teleop.s: src/sim_teleop.cpp.s
-
-.PHONY : src/sim_teleop.s
-
-# target to generate assembly for a file
-src/sim_teleop.cpp.s:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/sim_teleop.dir/build.make simulator/CMakeFiles/sim_teleop.dir/src/sim_teleop.cpp.s
-.PHONY : src/sim_teleop.cpp.s
 
 src/simulator.o: src/simulator.cpp.o
 
@@ -1355,7 +1283,7 @@ src/simulator.o: src/simulator.cpp.o
 
 # target to build an object file
 src/simulator.cpp.o:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/src/simulator.cpp.o
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/src/simulator.cpp.o
 .PHONY : src/simulator.cpp.o
 
 src/simulator.i: src/simulator.cpp.i
@@ -1364,7 +1292,7 @@ src/simulator.i: src/simulator.cpp.i
 
 # target to preprocess a source file
 src/simulator.cpp.i:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/src/simulator.cpp.i
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/src/simulator.cpp.i
 .PHONY : src/simulator.cpp.i
 
 src/simulator.s: src/simulator.cpp.s
@@ -1373,35 +1301,8 @@ src/simulator.s: src/simulator.cpp.s
 
 # target to generate assembly for a file
 src/simulator.cpp.s:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/src/simulator.cpp.s
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(MAKE) -f simulator/CMakeFiles/simulator.dir/build.make simulator/CMakeFiles/simulator.dir/src/simulator.cpp.s
 .PHONY : src/simulator.cpp.s
-
-src/simulator_v2.o: src/simulator_v2.cpp.o
-
-.PHONY : src/simulator_v2.o
-
-# target to build an object file
-src/simulator_v2.cpp.o:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_v2.dir/build.make simulator/CMakeFiles/simulator_v2.dir/src/simulator_v2.cpp.o
-.PHONY : src/simulator_v2.cpp.o
-
-src/simulator_v2.i: src/simulator_v2.cpp.i
-
-.PHONY : src/simulator_v2.i
-
-# target to preprocess a source file
-src/simulator_v2.cpp.i:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_v2.dir/build.make simulator/CMakeFiles/simulator_v2.dir/src/simulator_v2.cpp.i
-.PHONY : src/simulator_v2.cpp.i
-
-src/simulator_v2.s: src/simulator_v2.cpp.s
-
-.PHONY : src/simulator_v2.s
-
-# target to generate assembly for a file
-src/simulator_v2.cpp.s:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(MAKE) -f simulator/CMakeFiles/simulator_v2.dir/build.make simulator/CMakeFiles/simulator_v2.dir/src/simulator_v2.cpp.s
-.PHONY : src/simulator_v2.cpp.s
 
 # Help Target
 help:
@@ -1412,8 +1313,6 @@ help:
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... install"
-	@echo "... list_install_components"
-	@echo "... rebuild_cache"
 	@echo "... visualization_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... moveit_msgs_generate_messages_lisp"
@@ -1433,7 +1332,6 @@ help:
 	@echo "... moveit_ros_planning_gencfg"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... trajectory_msgs_generate_messages_eus"
-	@echo "... simulator_v2"
 	@echo "... shape_msgs_generate_messages_eus"
 	@echo "... shape_msgs_generate_messages_cpp"
 	@echo "... test"
@@ -1446,6 +1344,7 @@ help:
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... object_recognition_msgs_generate_messages_eus"
 	@echo "... octomap_msgs_generate_messages_eus"
+	@echo "... rebuild_cache"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... moveit_ros_manipulation_gencfg"
 	@echo "... simulator_genpy"
@@ -1453,9 +1352,6 @@ help:
 	@echo "... simulator"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
-	@echo "... edit_cache"
-	@echo "... visualization_msgs_generate_messages_lisp"
-	@echo "... std_msgs_generate_messages_eus"
 	@echo "... trajectory_msgs_generate_messages_py"
 	@echo "... moveit_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_nodejs"
@@ -1481,27 +1377,23 @@ help:
 	@echo "... simulator_genlisp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... object_recognition_msgs_generate_messages_cpp"
+	@echo "... roscpp_generate_messages_lisp"
+	@echo "... octomap_msgs_generate_messages_lisp"
 	@echo "... object_recognition_msgs_generate_messages_py"
 	@echo "... octomap_msgs_generate_messages_nodejs"
 	@echo "... octomap_msgs_generate_messages_py"
-	@echo "... roscpp_generate_messages_lisp"
-	@echo "... octomap_msgs_generate_messages_lisp"
-	@echo "... _simulator_generate_messages_check_deps_Teleop"
 	@echo "... simulator_generate_messages_cpp"
 	@echo "... simulator_gencpp"
+	@echo "... visualization_msgs_generate_messages_lisp"
+	@echo "... std_msgs_generate_messages_eus"
+	@echo "... edit_cache"
 	@echo "... simulator_generate_messages_lisp"
 	@echo "... simulator_geneus"
 	@echo "... simulator_generate_messages_nodejs"
-	@echo "... sim_teleop"
-	@echo "... src/sim_teleop.o"
-	@echo "... src/sim_teleop.i"
-	@echo "... src/sim_teleop.s"
+	@echo "... list_install_components"
 	@echo "... src/simulator.o"
 	@echo "... src/simulator.i"
 	@echo "... src/simulator.s"
-	@echo "... src/simulator_v2.o"
-	@echo "... src/simulator_v2.i"
-	@echo "... src/simulator_v2.s"
 .PHONY : help
 
 
@@ -1513,6 +1405,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/cjs/ros_workspaces/wam_sim/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/cjs/ros_workspaces/wam_sim_bak/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -1,8 +1,8 @@
-# Install script for directory: /home/cjs/ros_workspaces/wam_sim/src/barrett_moveit/barrett_wam_moveit_config
+# Install script for directory: /home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/barrett_wam_moveit_config
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/cjs/ros_workspaces/wam_sim/install")
+  set(CMAKE_INSTALL_PREFIX "/home/cjs/ros_workspaces/wam_sim_bak/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,25 +38,25 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim/build/barrett_moveit/barrett_wam_moveit_config/catkin_generated/installspace/barrett_wam_moveit_config.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/barrett_wam_moveit_config/catkin_generated/installspace/barrett_wam_moveit_config.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config/cmake" TYPE FILE FILES
-    "/home/cjs/ros_workspaces/wam_sim/build/barrett_moveit/barrett_wam_moveit_config/catkin_generated/installspace/barrett_wam_moveit_configConfig.cmake"
-    "/home/cjs/ros_workspaces/wam_sim/build/barrett_moveit/barrett_wam_moveit_config/catkin_generated/installspace/barrett_wam_moveit_configConfig-version.cmake"
+    "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/barrett_wam_moveit_config/catkin_generated/installspace/barrett_wam_moveit_configConfig.cmake"
+    "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/barrett_wam_moveit_config/catkin_generated/installspace/barrett_wam_moveit_configConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim/src/barrett_moveit/barrett_wam_moveit_config/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/barrett_wam_moveit_config/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config" TYPE DIRECTORY FILES "/home/cjs/ros_workspaces/wam_sim/src/barrett_moveit/barrett_wam_moveit_config/launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config" TYPE DIRECTORY FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/barrett_wam_moveit_config/launch")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config" TYPE DIRECTORY FILES "/home/cjs/ros_workspaces/wam_sim/src/barrett_moveit/barrett_wam_moveit_config/config")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_wam_moveit_config" TYPE DIRECTORY FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/barrett_wam_moveit_config/config")
 endif()
 

@@ -1,8 +1,8 @@
-# Install script for directory: /home/cjs/ros_workspaces/wam_sim/src/barrett_model
+# Install script for directory: /home/cjs/ros_workspaces/wam_sim_bak/src/barrett_model
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/cjs/ros_workspaces/wam_sim/install")
+  set(CMAKE_INSTALL_PREFIX "/home/cjs/ros_workspaces/wam_sim_bak/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim/build/barrett_model/catkin_generated/installspace/barrett_model.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_model/catkin_generated/installspace/barrett_model.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_model/cmake" TYPE FILE FILES
-    "/home/cjs/ros_workspaces/wam_sim/build/barrett_model/catkin_generated/installspace/barrett_modelConfig.cmake"
-    "/home/cjs/ros_workspaces/wam_sim/build/barrett_model/catkin_generated/installspace/barrett_modelConfig-version.cmake"
+    "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_model/catkin_generated/installspace/barrett_modelConfig.cmake"
+    "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_model/catkin_generated/installspace/barrett_modelConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_model" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim/src/barrett_model/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/barrett_model" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_model/package.xml")
 endif()
 

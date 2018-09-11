@@ -20,7 +20,6 @@ find_package(Eigen3 REQUIRED)
 
 add_message_files(
   FILES
-  Teleop.msg
 )
 
 generate_messages(
@@ -43,15 +42,4 @@ include_directories(
 add_executable(simulator src/simulator.cpp)
 target_link_libraries(simulator
   ${catkin_LIBRARIES}
-)
-
-add_executable(simulator_v2 src/simulator_v2.cpp)
-target_link_libraries(simulator_v2
-  ${catkin_LIBRARIES}
-)
-
-add_executable(sim_teleop src/sim_teleop.cpp)
-target_link_libraries(simulator
-  ${catkin_LIBRARIES}
-  ${Eigen3_LIBRARIES}
 )

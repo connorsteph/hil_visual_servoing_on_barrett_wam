@@ -1,2 +1,2 @@
 barrett_model:barrett_moveit/barrett_wam_moveit_config:barrett_moveit/config_2:simulator
--DCATKIN_DEVEL_PREFIX=/home/cjs/ros_workspaces/wam_sim/devel -DCMAKE_INSTALL_PREFIX=/home/cjs/ros_workspaces/wam_sim/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/cjs/ros_workspaces/wam_sim_bak/devel -DCMAKE_INSTALL_PREFIX=/home/cjs/ros_workspaces/wam_sim_bak/install -G Unix Makefiles

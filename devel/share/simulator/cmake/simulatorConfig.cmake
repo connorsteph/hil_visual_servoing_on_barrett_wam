@@ -67,14 +67,14 @@ set(simulator_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(simulator_SOURCE_PREFIX /home/cjs/ros_workspaces/wam_sim/src/simulator)
-  set(simulator_DEVEL_PREFIX /home/cjs/ros_workspaces/wam_sim/devel)
+  set(simulator_SOURCE_PREFIX /home/cjs/ros_workspaces/wam_sim_bak/src/simulator)
+  set(simulator_DEVEL_PREFIX /home/cjs/ros_workspaces/wam_sim_bak/devel)
   set(simulator_INSTALL_PREFIX "")
   set(simulator_PREFIX ${simulator_DEVEL_PREFIX})
 else()
   set(simulator_SOURCE_PREFIX "")
   set(simulator_DEVEL_PREFIX "")
-  set(simulator_INSTALL_PREFIX /home/cjs/ros_workspaces/wam_sim/install)
+  set(simulator_INSTALL_PREFIX /home/cjs/ros_workspaces/wam_sim_bak/install)
   set(simulator_PREFIX ${simulator_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(simulator_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/cjs/ros_workspaces/wam_sim/devel/include;/home/cjs/ros_workspaces/wam_sim/src/simulator/include " STREQUAL " ")
+if(NOT "/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include " STREQUAL " ")
   set(simulator_INCLUDE_DIRS "")
-  set(_include_dirs "/home/cjs/ros_workspaces/wam_sim/devel/include;/home/cjs/ros_workspaces/wam_sim/src/simulator/include")
+  set(_include_dirs "/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/cjs/ros_workspaces/wam_sim/devel/include;/home/cjs/ros_workspaces/
         message(FATAL_ERROR "Project 'simulator' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'simulator' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/cjs/ros_workspaces/wam_sim/src/simulator/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'simulator' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/${idir}'.  ${_report}")
     endif()
     _list_append_unique(simulator_INCLUDE_DIRS ${include})
   endforeach()
@@ -129,7 +129,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/cjs/ros_workspaces/wam_sim/devel/lib;/home/cjs/ros_workspaces/wam_sim/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/cjs/ros_workspaces/wam_sim_bak/devel/lib;/home/cjs/ros_workspaces/wam_sim_bak/devel/lib;/home/cjs/ros_workspaces/wam_sim/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
