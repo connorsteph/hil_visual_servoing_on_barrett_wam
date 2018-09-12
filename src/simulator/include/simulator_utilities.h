@@ -100,8 +100,8 @@ geometry_msgs::Pose get_pose(const Eigen::Vector3d &object_position, const Eigen
     return pose_msg;
 }
 
-Eigen::Vector3d getToolPosition(const Eigen::VectorXd& joint_positions, int dof)
-{   
+Eigen::Vector3d getToolPosition(const Eigen::VectorXd &joint_positions, int dof)
+{
     double d3 = 4.76e-2;
     double L3 = 55.8e-2;
     double L4 = 29.1e-2;
@@ -109,7 +109,7 @@ Eigen::Vector3d getToolPosition(const Eigen::VectorXd& joint_positions, int dof)
     Eigen::VectorXd denavit_a(7);
     denavit_a << 0.0, 0.0, 0.0, d3, -d3, 0.0, 0.0;
     Eigen::VectorXd denavit_alpha(7);
-    denavit_alpha << 0, -M_PI/2.0, M_PI/2.0, -M_PI/2.0, M_PI/2.0, -M_PI/2.0, M_PI/2.0;
+    denavit_alpha << 0, -M_PI / 2.0, M_PI / 2.0, -M_PI / 2.0, M_PI / 2.0, -M_PI / 2.0, M_PI / 2.0;
     Eigen::VectorXd denavit_d(7);
     denavit_d << 0, 0, L3, 0, L4, 0, L7;
     Eigen::Vector3d tool_pos;
@@ -121,27 +121,27 @@ Eigen::Vector3d getToolPosition(const Eigen::VectorXd& joint_positions, int dof)
     Eigen::VectorXd cos_alpha = denavit_alpha.array().cos();
     Eigen::VectorXd sin_alpha = denavit_alpha.array().sin();
     for (int i = 0; i < dof; ++i)
-    {   
+    {
         temp_matrix(0, 0) = cos_theta[i];
         temp_matrix(0, 1) = -sin_theta[i];
         temp_matrix(0, 2) = 0.0;
         temp_matrix(0, 3) = denavit_a[i];
         //
-        temp_matrix(1, 0) = sin_theta[i]*cos_alpha[i];
-        temp_matrix(1, 1) = cos_theta[i]*cos_alpha[i];
+        temp_matrix(1, 0) = sin_theta[i] * cos_alpha[i];
+        temp_matrix(1, 1) = cos_theta[i] * cos_alpha[i];
         temp_matrix(1, 2) = -sin_alpha[i];
-        temp_matrix(1, 3) = -sin_alpha[i]*denavit_d[i];
+        temp_matrix(1, 3) = -sin_alpha[i] * denavit_d[i];
         //
-        temp_matrix(2, 0) = sin_theta[i]*sin_alpha[i];
-        temp_matrix(2, 1) = cos_theta[i]*sin_alpha[i];
+        temp_matrix(2, 0) = sin_theta[i] * sin_alpha[i];
+        temp_matrix(2, 1) = cos_theta[i] * sin_alpha[i];
         temp_matrix(2, 2) = cos_alpha[i];
-        temp_matrix(2, 3) = cos_alpha[i]*denavit_d[i];
+        temp_matrix(2, 3) = cos_alpha[i] * denavit_d[i];
         //
         temp_matrix(3, 0) = 0.0;
         temp_matrix(3, 1) = 0.0;
         temp_matrix(3, 2) = 0.0;
         temp_matrix(3, 3) = 1.0;
-        hom_mat = hom_mat*temp_matrix;
+        hom_mat = hom_mat * temp_matrix;
     }
     for (int j = 0; j < 3; ++j)
     {

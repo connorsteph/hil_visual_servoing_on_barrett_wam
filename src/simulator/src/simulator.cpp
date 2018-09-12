@@ -2,111 +2,228 @@
 #include <simulator_utilities.h>
 using namespace std;
 
-void addCollisionObjects(moveit::planning_interface::PlanningSceneInterface &planning_scene_interface)
+void Simulator::setCollisionObjects()
 {
-    // vector<moveit_msgs::ObjectColor> colors;
-    // colors.resize(2);
-    // colors[0].color.r = 0;
-    // colors[0].color.g = 50;
-    // colors[0].color.b = 0;
-    // colors[0].color.a = 0.9;
-    // colors[1].color.r = 50;
-    // colors[1].color.g = 0;
-    // colors[1].color.b = 0;
-    // colors[1].color.a = 0.9;
+    Eigen::Quaterniond quaternion;
+    Eigen::Vector3d rpy;
+    table.resize(1);
+    table[0].id = "table";
+    table[0].header.frame_id = "";
+    table[0].primitives.resize(1);
+    table[0].primitives[0].type = table[0].primitives[0].BOX;
+    table[0].primitives[0].dimensions.resize(3);
+    table[0].primitives[0].dimensions[0] = 1;
+    table[0].primitives[0].dimensions[1] = 1;
+    table[0].primitives[0].dimensions[2] = 0.1;
+    table[0].primitive_poses.resize(1);
+    table[0].primitive_poses[0].position.x = 0.8;
+    table[0].primitive_poses[0].position.y = 0;
+    table[0].primitive_poses[0].position.z = 1.05;
+    table[0].operation = table[0].ADD;
+    table_color.resize(1);
+    moveit_msgs::ObjectColor temp_color;
+    temp_color.color.r = 0;
+    temp_color.color.g = 0;
+    temp_color.color.b = 255;
+    temp_color.color.a = 1.0;
+    table_color[0] = temp_color;
+    grasping_objects.resize(10);
+    grasping_objects[0].header.frame_id = "";
+    grasping_objects[0].id = "box1";
+    grasping_objects[0].primitives.resize(1);
+    grasping_objects[0].primitives[0].type = grasping_objects[0].primitives[0].BOX;
+    grasping_objects[0].primitives[0].dimensions.resize(3);
+    grasping_objects[0].primitives[0].dimensions[0] = 0.1;
+    grasping_objects[0].primitives[0].dimensions[1] = 0.05;
+    grasping_objects[0].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[0].primitive_poses.resize(1);
+    grasping_objects[0].primitive_poses[0].position.x = 0.8;
+    grasping_objects[0].primitive_poses[0].position.y = 0.3;
+    grasping_objects[0].primitive_poses[0].position.z = 1.2;
+    grasping_objects[0].operation = grasping_objects[0].ADD;
+    grasping_objects[1].header.frame_id = "";
+    grasping_objects[1].id = "box2";
+    grasping_objects[1].primitives.resize(1);
+    grasping_objects[1].primitives[0].type = grasping_objects[1].primitives[0].BOX;
+    grasping_objects[1].primitives[0].dimensions.resize(3);
+    grasping_objects[1].primitives[0].dimensions[0] = 0.1;
+    grasping_objects[1].primitives[0].dimensions[1] = 0.05;
+    grasping_objects[1].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[1].primitive_poses.resize(1);
+    grasping_objects[1].primitive_poses[0].position.x = 0.6;
+    grasping_objects[1].primitive_poses[0].position.y = 0.0;
+    grasping_objects[1].primitive_poses[0].position.z = 1.2;
+    rpy << 0, 0, M_PI / 3.0;
+    // cout << rpy << endl;
+    quaternion = toQuaternion(rpy);
+    grasping_objects[1].primitive_poses[0].orientation.w = quaternion.w();
+    grasping_objects[1].primitive_poses[0].orientation.x = quaternion.x();
+    grasping_objects[1].primitive_poses[0].orientation.y = quaternion.y();
+    grasping_objects[1].primitive_poses[0].orientation.z = quaternion.z();
+    grasping_objects[1].operation = grasping_objects[1].ADD;
 
-    // BEGIN_SUB_TUTORIAL table1
-    //
-    // Creating Environment
-    // ^^^^^^^^^^^^^^^^^^^^
-    // Create vector to hold 3 collision objects.
-    std::vector<moveit_msgs::CollisionObject> collision_objects;
-    collision_objects.resize(1);
+    grasping_objects[2].header.frame_id = "";
+    grasping_objects[2].id = "box3";
+    grasping_objects[2].primitives.resize(1);
+    grasping_objects[2].primitives[0].type = grasping_objects[2].primitives[0].BOX;
+    grasping_objects[2].primitives[0].dimensions.resize(3);
+    grasping_objects[2].primitives[0].dimensions[0] = 0.1;
+    grasping_objects[2].primitives[0].dimensions[1] = 0.05;
+    grasping_objects[2].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[2].primitive_poses.resize(1);
+    grasping_objects[2].primitive_poses[0].position.x = 0.6;
+    grasping_objects[2].primitive_poses[0].position.y = 0.0;
+    grasping_objects[2].primitive_poses[0].position.z = 1.2;
+    rpy << 0, 0, 0;
+    // cout << rpy << endl;
+    quaternion = toQuaternion(rpy);
+    grasping_objects[2].primitive_poses[0].orientation.w = quaternion.w();
+    grasping_objects[2].primitive_poses[0].orientation.x = quaternion.x();
+    grasping_objects[2].primitive_poses[0].orientation.y = quaternion.y();
+    grasping_objects[2].primitive_poses[0].orientation.z = quaternion.z();
+    grasping_objects[2].operation = grasping_objects[2].ADD;
 
-    // Add the first table where the cube will originally be kept.
-    collision_objects[0].id = "table";
-    collision_objects[0].header.frame_id = "";
+    grasping_objects.resize(10);
+    grasping_objects[3].header.frame_id = "";
+    grasping_objects[3].id = "box4";
+    grasping_objects[3].primitives.resize(1);
+    grasping_objects[3].primitives[0].type = grasping_objects[3].primitives[0].BOX;
+    grasping_objects[3].primitives[0].dimensions.resize(3);
+    grasping_objects[3].primitives[0].dimensions[0] = 0.1;
+    grasping_objects[3].primitives[0].dimensions[1] = 0.05;
+    grasping_objects[3].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[3].primitive_poses.resize(1);
+    grasping_objects[3].primitive_poses[0].position.x = 0.7;
+    grasping_objects[3].primitive_poses[0].position.y = -0.4;
+    grasping_objects[3].primitive_poses[0].position.z = 1.2;
+    rpy << 0, 0, M_PI / 3.0;
+    quaternion = toQuaternion(rpy);
+    grasping_objects[3].primitive_poses[0].orientation.w = quaternion.w();
+    grasping_objects[3].primitive_poses[0].orientation.x = quaternion.x();
+    grasping_objects[3].primitive_poses[0].orientation.y = quaternion.y();
+    grasping_objects[3].primitive_poses[0].orientation.z = quaternion.z();
+    grasping_objects[3].operation = grasping_objects[3].ADD;
 
-    /* Define the primitive and its dimensions. */
-    collision_objects[0].primitives.resize(1);
-    collision_objects[0].primitives[0].type = collision_objects[0].primitives[0].BOX;
-    collision_objects[0].primitives[0].dimensions.resize(3);
-    collision_objects[0].primitives[0].dimensions[0] = 1;
-    collision_objects[0].primitives[0].dimensions[1] = 1;
-    collision_objects[0].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[4].header.frame_id = "";
+    grasping_objects[4].id = "box5";
+    grasping_objects[4].primitives.resize(1);
+    grasping_objects[4].primitives[0].type = grasping_objects[4].primitives[0].BOX;
+    grasping_objects[4].primitives[0].dimensions.resize(3);
+    grasping_objects[4].primitives[0].dimensions[0] = 0.1;
+    grasping_objects[4].primitives[0].dimensions[1] = 0.05;
+    grasping_objects[4].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[4].primitive_poses.resize(1);
+    grasping_objects[4].primitive_poses[0].position.x = 0.7;
+    grasping_objects[4].primitive_poses[0].position.y = -0.4;
+    grasping_objects[4].primitive_poses[0].position.z = 1.2;
+    rpy << 0, 0, 0;
+    quaternion = toQuaternion(rpy);
+    grasping_objects[4].primitive_poses[0].orientation.w = quaternion.w();
+    grasping_objects[4].primitive_poses[0].orientation.x = quaternion.x();
+    grasping_objects[4].primitive_poses[0].orientation.y = quaternion.y();
+    grasping_objects[4].primitive_poses[0].orientation.z = quaternion.z();
+    grasping_objects[4].operation = grasping_objects[4].ADD;
 
-    /* Define the pose of the table. */
-    collision_objects[0].primitive_poses.resize(1);
-    collision_objects[0].primitive_poses[0].position.x = 0.8;
-    collision_objects[0].primitive_poses[0].position.y = 0;
-    collision_objects[0].primitive_poses[0].position.z = 1.0;
-    // END_SUB_TUTORIAL
+    grasping_objects[5].header.frame_id = "";
+    grasping_objects[5].id = "cylinder1";
+    grasping_objects[5].primitives.resize(1);
+    grasping_objects[5].primitives[0].type = grasping_objects[5].primitives[0].CYLINDER;
+    grasping_objects[5].primitives[0].dimensions.resize(2);
+    grasping_objects[5].primitives[0].dimensions[0] = 0.25;
+    grasping_objects[5].primitives[0].dimensions[1] = 0.04;
+    grasping_objects[5].primitive_poses.resize(1);
+    grasping_objects[5].primitive_poses[0].position.x = 0.8;
+    grasping_objects[5].primitive_poses[0].position.y = 0.3;
+    grasping_objects[5].primitive_poses[0].position.z = 1.25;
+    grasping_objects[5].operation = grasping_objects[5].ADD;
 
-    collision_objects[0].operation = collision_objects[0].ADD;
+    grasping_objects[6].header.frame_id = "";
+    grasping_objects[6].id = "cylinder2";
+    grasping_objects[6].primitives.resize(1);
+    grasping_objects[6].primitives[0].type = grasping_objects[6].primitives[0].CYLINDER;
+    grasping_objects[6].primitives[0].dimensions.resize(2);
+    grasping_objects[6].primitives[0].dimensions[0] = 0.25;
+    grasping_objects[6].primitives[0].dimensions[1] = 0.04;
+    grasping_objects[6].primitive_poses.resize(1);
+    grasping_objects[6].primitive_poses[0].position.x = 0.5;
+    grasping_objects[6].primitive_poses[0].position.y = 0.3;
+    grasping_objects[6].primitive_poses[0].position.z = 1.25;
+    grasping_objects[6].operation = grasping_objects[6].ADD;
 
-    vector<moveit_msgs::CollisionObject> objects;
-    objects.resize(1);
-    objects[0].header.frame_id = "";
-    objects[0].id = "object";
+    grasping_objects[7].header.frame_id = "";
+    grasping_objects[7].id = "cylinder3";
+    grasping_objects[7].primitives.resize(1);
+    grasping_objects[7].primitives[0].type = grasping_objects[7].primitives[0].CYLINDER;
+    grasping_objects[7].primitives[0].dimensions.resize(2);
+    grasping_objects[7].primitives[0].dimensions[0] = 0.25;
+    grasping_objects[7].primitives[0].dimensions[1] = 0.04;
+    grasping_objects[7].primitive_poses.resize(1);
+    grasping_objects[7].primitive_poses[0].position.x = 0.7;
+    grasping_objects[7].primitive_poses[0].position.y = -0.2;
+    grasping_objects[7].primitive_poses[0].position.z = 1.25;
+    grasping_objects[7].operation = grasping_objects[7].ADD;
 
-    /* Define the primitive and its dimensions. */
-    objects[0].primitives.resize(1);
-    objects[0].primitives[0].type = objects[0].primitives[0].BOX;
-    objects[0].primitives[0].dimensions.resize(3);
-    objects[0].primitives[0].dimensions[0] = 0.1;
-    objects[0].primitives[0].dimensions[1] = 0.05;
-    objects[0].primitives[0].dimensions[2] = 0.2;
+    grasping_objects[8].header.frame_id = "";
+    grasping_objects[8].id = "cylinder4";
+    grasping_objects[8].primitives.resize(1);
+    grasping_objects[8].primitives[0].type = grasping_objects[8].primitives[0].CYLINDER;
+    grasping_objects[8].primitives[0].dimensions.resize(2);
+    grasping_objects[8].primitives[0].dimensions[0] = 0.25;
+    grasping_objects[8].primitives[0].dimensions[1] = 0.04;
+    grasping_objects[8].primitive_poses.resize(1);
+    grasping_objects[8].primitive_poses[0].position.x = 0.5;
+    grasping_objects[8].primitive_poses[0].position.y = -0.4;
+    grasping_objects[8].primitive_poses[0].position.z = 1.25;
+    grasping_objects[8].operation = grasping_objects[8].ADD;
 
-    /* Define the pose of the object. */
-    objects[0].primitive_poses.resize(1);
-    objects[0].primitive_poses[0].position.x = 0.8;
-    objects[0].primitive_poses[0].position.y = 0.3;
-    objects[0].primitive_poses[0].position.z = 1.2;
-
-    objects[0].operation = objects[0].ADD;
-    
-    vector<moveit_msgs::ObjectColor> colors;
-    colors.resize(1);
-    moveit_msgs::ObjectColor red;
-    red.color.r = 0;
-    red.color.g = 0;
-    red.color.b = 255;
-    red.color.a = 1.0;
-    colors[0] = red;
-    planning_scene_interface.applyCollisionObjects(collision_objects, colors);
-    planning_scene_interface.applyCollisionObjects(objects);
+    grasping_objects[9].header.frame_id = "";
+    grasping_objects[9].id = "cylinder5";
+    grasping_objects[9].primitives.resize(1);
+    grasping_objects[9].primitives[0].type = grasping_objects[9].primitives[0].CYLINDER;
+    grasping_objects[9].primitives[0].dimensions.resize(2);
+    grasping_objects[9].primitives[0].dimensions[0] = 0.25;
+    grasping_objects[9].primitives[0].dimensions[1] = 0.04;
+    grasping_objects[9].primitive_poses.resize(1);
+    grasping_objects[9].primitive_poses[0].position.x = 0.4;
+    grasping_objects[9].primitive_poses[0].position.y = 0.0;
+    grasping_objects[9].primitive_poses[0].position.z = 1.25;
+    grasping_objects[9].operation = grasping_objects[9].ADD;
 }
 
 Simulator::Simulator(ros::NodeHandle nh_)
 {
-    cout << "Constructor flag\n";
-
+    command_count = 1;
+    object_idx = 0;
     joy_sub = nh_.subscribe("/joy", 1, &Simulator::joy_cb, this);
     pub_joint_state = nh_.advertise<sensor_msgs::JointState>("/joint_states", 1);
     robot_model_loader = robot_model_loader::RobotModelLoader("robot_description");
     kinematic_model = robot_model_loader.getModel();
     kinematic_state = robot_state::RobotStatePtr(new robot_state::RobotState(kinematic_model));
     ros::Publisher planning_scene_diff_publisher = nh_.advertise<moveit_msgs::PlanningScene>("planning_scene", 1);
-    ros::WallDuration sleep_t(0.5);
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
-    addCollisionObjects(planning_scene_interface);
+    setCollisionObjects();
+    current_grasping_objects.resize(1);
+    current_grasping_objects[0] = grasping_objects[object_idx];
+    planning_scene_interface.applyCollisionObjects(current_grasping_objects);
+    planning_scene_interface.applyCollisionObjects(table, table_color);
     ros::WallDuration(1.0).sleep();
-    // while (planning_scene_diff_publisher.getNumSubscribers() < 1)
-    // {
-    //     sleep_t.sleep();
-    // }
 }
 
 Simulator::~Simulator()
 {
     joy_sub.shutdown();
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
-    vector<string> object_ids = {"object", "table"};
+    vector<string> object_ids;
+    object_ids.resize(1);
+    object_ids[0] = current_grasping_objects[0].id;
+    planning_scene_interface.removeCollisionObjects(object_ids);
+    object_ids[0] = table[0].id;
     planning_scene_interface.removeCollisionObjects(object_ids);
 }
 
 void Simulator::teleop_grasp()
 {
+    moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     teleop_move = false;
     const std::string PLANNING_GROUP = "arm";
     moveit::planning_interface::MoveGroupInterface move_group(PLANNING_GROUP);
@@ -114,18 +231,15 @@ void Simulator::teleop_grasp()
     const std::vector<std::string> &joint_names = joint_model_group->getVariableNames();
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
     vector<double> joints;
-
-    cout << "\n**************************************" << endl;
-    int i = 1;
     int c;
     goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
     move_group.setJointValueTarget(goal_joint_angles);
     bool success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
     if (success)
     {
-        cout << "moving to initial position\n";
+        cout << "Moving to initial position..\n";
         move_group.move();
-        cout << "ready.\n";
+        cout << "Ready to teleop.\n";
     }
     else
     {
@@ -136,16 +250,50 @@ void Simulator::teleop_grasp()
 
     while (true)
     {
-        ros::Rate(10).sleep();
+        ros::Rate(30).sleep();
+        if (next_object)
+        {
+            int idx;
+            if (controller_axes[4] < 0)
+            {
+                object_idx = (object_idx + 1) % grasping_objects.size();
+            }
+            else
+            {
+                if (object_idx > 0)
+                {   
+                    cout << "Shit meet fan\n";
+                    --object_idx;
+                }
+                else
+                {
+                    object_idx = grasping_objects.size() - 1;
+                }
+            }
+            vector<string> object_ids;
+            object_ids.resize(1);
+            object_ids[0] = current_grasping_objects[0].id;
+            planning_scene_interface.removeCollisionObjects(object_ids);
+            current_grasping_objects[0] = grasping_objects[object_idx];
+            planning_scene_interface.applyCollisionObjects(current_grasping_objects);
+            cout << "Switching to object " << object_idx + 1 << " - resetting" << endl;
+            goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
+            spherical_position = {0.4, M_PI / 6.0, M_PI};
+            double x = grasping_objects[object_idx].primitive_poses[0].position.x;
+            double y = grasping_objects[object_idx].primitive_poses[0].position.y;
+            double z = grasping_objects[object_idx].primitive_poses[0].position.z;
+            object_position << x, y , z;
+            yaw_offset = 0.0;
+            move_group.setJointValueTarget(goal_joint_angles);
+            move_group.plan(my_plan);
+            move_group.move();
+            cout << "Reset complete.\n";
+            next_object = false;
+        }
         if (teleop_move)
         {
-            // cout << "received teleop grasp command" << endl;
-            cout << "Move: " << i++ << endl;
+            cout << "Command number: " << command_count++ << endl;
             move_group.getCurrentState()->copyJointGroupPositions(joint_model_group, joints);
-            // cout << "Translation: \n"
-            //      << move_group.getCurrentState()->getGlobalLinkTransform("wam/wrist_palm_stump_link").translation() << "\n*****************" << endl;
-            // cout << "Rotation: \n"
-            //      << move_group.getCurrentState()->getGlobalLinkTransform("wam/wrist_palm_stump_link").rotation() << "\n*****************" << endl;
             for (int i = 0; i < joints.size(); ++i)
             {
                 current_joint_angles[i] = joints[i];
@@ -158,11 +306,10 @@ void Simulator::teleop_grasp()
             cout << "done.\n";
             switch (c)
             {
-            case 0: // convergence - return early (OR IK FAILURE!!)
+            case 0:
                 cout << "Case 0 - finishing\n";
                 return;
-            case 2: // step completed successfully
-                // cout << "NEXT!\n";
+            case 2:
                 teleop_move = false;
                 break;
             }
@@ -176,6 +323,11 @@ int Simulator::teleop_grasp_step()
     if (controller_buttons[8])
     {
         cout << "User quit teleop. Exiting.." << endl;
+        moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+        vector<string> object_ids;
+        object_ids.resize(1);
+        object_ids[0] = current_grasping_objects[0].id;
+        planning_scene_interface.removeCollisionObjects(object_ids);
         return 0;
     }
     if (controller_buttons[3])
@@ -224,6 +376,10 @@ int Simulator::teleop_grasp_step()
     control_vec[1] = controller_axes[3];
     control_vec[2] = -controller_axes[2];
     control_vec[3] = controller_buttons[5] - controller_buttons[4];
+    if (controller_buttons[9])
+    {
+        control_vec << 0, 9.99, 0, 0;
+    }
     cout << "Control vec: \n"
          << control_vec << endl;
     if (Simulator::sphere_move(control_vec))
@@ -235,6 +391,14 @@ int Simulator::teleop_grasp_step()
 
 bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
 {
+    if (control_vec[1] == 9.99)
+    {
+        cout << "Resetting to initial position" << endl;
+        goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
+        spherical_position = {0.4, M_PI / 6.0, M_PI};
+        yaw_offset = 0.0;
+        return true;
+    }
     const robot_state::JointModelGroup *joint_model_group = kinematic_model->getJointModelGroup(PLANNING_GROUP);
     const std::vector<std::string> &joint_names = joint_model_group->getVariableNames();
     Eigen::Quaterniond quaternion;
@@ -242,7 +406,7 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     Eigen::VectorXd ortn(4);
     Eigen::Vector3d rpy;
     Eigen::VectorXd full_pose(7);
-    double delta_radians = M_PI / 15; // 45 degrees per second at 30Hz
+    double delta_radians = M_PI / 15;
     Eigen::Vector3d rel_cart_pos;
     Eigen::Vector3d cart_pos;
     Eigen::Matrix3d rotator;
@@ -251,7 +415,6 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     vector<double> joints;
     spherical_position[0] += 0.05 * control_vec[0];
     rel_cart_pos = spherical_to_cartesian(spherical_position);
-    // cout << "Cartesian pos:" << rel_cart_pos << endl;
     if (abs(control_vec[1]) > 0 || abs(control_vec[2]) > 0)
     {
         axis = Eigen::Vector3d::UnitX() * (control_vec[2]) + Eigen::Vector3d::UnitY() * (control_vec[1]);
@@ -261,7 +424,6 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
         spherical_position = cartesian_to_spherical(rel_cart_pos);
     }
     pose_msg = get_pose(object_position, getToolPosition(current_joint_angles, total_joints));
-    // cout << "Pose msg: " << pose_msg << endl;
     bool found_ik = kinematic_state->setFromIK(joint_model_group, pose_msg, "wam/wrist_palm_stump_link", 1, 0.05);
     if (found_ik)
     {
@@ -271,12 +433,12 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
             goal_joint_angles[i] = joints[i];
         }
         // yaw_offset = current_joint_angles[6] - goal_joint_angles[6];
-        yaw_offset -= 3.0 * delta_radians * control_vec[3];
+        yaw_offset += 2.0 * delta_radians * control_vec[3];
     }
     else
     {
         cout << "IK problem" << endl;
-        yaw_offset = 0.0;
+        // yaw_offset = 0.0;
     }
 
     cout << "yaw offset: " << yaw_offset << endl;
@@ -289,13 +451,6 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     ortn[1] = quaternion.y();
     ortn[2] = quaternion.z();
     ortn[3] = quaternion.w();
-    // full_pose[0] = cart_pos[0];
-    // full_pose[1] = cart_pos[1]
-    // full_pose[2] = cart_pos[2];
-    // full_pose[3] = ortn[0];
-    // full_pose[4] = ortn[1];
-    // full_pose[5] = ortn[2];
-    // full_pose[6] = ortn[3];
     pose_msg.position.x = cart_pos[0];
     pose_msg.position.y = cart_pos[1];
     pose_msg.position.z = cart_pos[2];
@@ -316,7 +471,7 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     }
     else
     {
-        ROS_INFO("Did not find IK solution");
+        ROS_INFO("Did not find IK solution with yaw.");
         for (int i = 0; i < goal_joint_angles.size(); ++i)
         {
             goal_joint_angles[i] = current_joint_angles[i];

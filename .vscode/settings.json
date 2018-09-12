@@ -31,6 +31,14 @@
         "sstream": "cpp",
         "string_view": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
-    }
+        "utility": "cpp",
+        "deque": "cpp",
+        "thread": "cpp"
+    },
+    "ros.distro": "melodic",
+    "python.autoComplete.extraPaths": [
+        "/home/cjs/ros_workspaces/wam_sim_bak/devel/lib/python2.7/dist-packages",
+        "/home/cjs/ros_workspaces/wam_sim/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages"
+    ]
 }

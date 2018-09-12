@@ -31,23 +31,27 @@ class Simulator
 {
   public:
     bool teleop_move = false;
+    bool next_object = false;
     bool is_spread;
     bool grip_closed;
+    int command_count;
+    int object_idx;
     robot_model_loader::RobotModelLoader robot_model_loader;
     robot_model::RobotModelPtr kinematic_model;
     robot_state::RobotStatePtr kinematic_state;
     const string PLANNING_GROUP = "arm";
-    // moveit::planning_interface::MoveGroupInterface move_group;
-
+    std::vector<moveit_msgs::CollisionObject> grasping_objects;
+    std::vector<moveit_msgs::CollisionObject> current_grasping_objects;
+    std::vector<moveit_msgs::CollisionObject> table;
+    vector<moveit_msgs::ObjectColor> table_color;
     std::vector<float> controller_axes;
     std::vector<int> controller_buttons;
     const int total_joints = 7;
-    std::vector<bool> active_buttons_map = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0};
-    std::vector<bool> active_axes_map = {1, 1, 1, 1, 0, 0};
+    std::vector<bool> active_buttons_map = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0};
+    std::vector<bool> active_axes_map = {1, 1, 1, 1, 1, 0};
     Eigen::Vector3d object_position = {0.8, 0.3, 1.2};
-    Eigen::Vector3d spherical_position{0.4, M_PI/6.0, M_PI}; // r, theta, phi
+    Eigen::Vector3d spherical_position{0.4, M_PI / 6.0, M_PI}; // r, theta, phi
     Eigen::Matrix<double, 7, 1> current_joint_angles;
-    // current_joint_angles = {0, 0, 0, 0, 0, 0 ,0};
     vector<double> goal_joint_angles;
     double yaw_offset = 0.0;
     double control_radius;
@@ -55,8 +59,8 @@ class Simulator
     Simulator(ros::NodeHandle nh_);
     ~Simulator();
 
-    // void publish_joint_state(float t);
     void loop();
+    void setCollisionObjects();
     bool sphere_move(const Eigen::VectorXd &control_vec);
     void teleop_grasp();
     int teleop_grasp_step();
@@ -98,10 +102,17 @@ class Simulator
         }
         if (sentinel)
         {
-            controller_axes = temp_controller_axes;
-            controller_buttons = temp_controller_buttons;
-            teleop_move = true;
-            // cout << "Teleop move\n";
+            if (abs(temp_controller_axes[4]) == 1.0)
+            {   
+                controller_axes = temp_controller_axes;
+                next_object = true;
+            }
+            else
+            {
+                controller_axes = temp_controller_axes;
+                controller_buttons = temp_controller_buttons;
+                teleop_move = true;
+            }
         }
     }
 };
