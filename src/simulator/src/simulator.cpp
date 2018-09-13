@@ -268,23 +268,25 @@ void Simulator::teleop_grasp()
     const robot_state::JointModelGroup *joint_model_group = move_group.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
     const std::vector<std::string> &joint_names = joint_model_group->getVariableNames();
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+    Eigen::Vector3d tool_position = move_group.getCurrentState()->getGlobalLinkTransform(tool_link).translation();
+    spherical_position = cartesian_to_spherical(tool_position - object_position_estimate);
     vector<double> joints;
     int c;
-    goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
-    move_group.setJointValueTarget(goal_joint_angles);
-    bool success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
-    if (success)
-    {
-        cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nMoving to initial position..\n";
-        move_group.move();
-        cout << "Ready to teleop.\n";
-    }
-    else
-    {
-        object_position[0] -= 0.05 * controller_axes[1];
-        object_position[1] -= 0.05 * controller_axes[0];
-        spherical_position[0] -= 0.05 * (controller_buttons[6] - controller_buttons[7]);
-    }
+    // goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
+    // move_group.setJointValueTarget(goal_joint_angles);
+    // bool success = (move_group.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+    // if (success)
+    // {
+    //     cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nMoving to initial position..\n";
+    //     move_group.move();
+    //     cout << "Ready to teleop.\n";
+    // }
+    // else
+    // {
+    //     object_position[0] -= 0.05 * controller_axes[1];
+    //     object_position[1] -= 0.05 * controller_axes[0];
+    //     spherical_position[0] -= 0.05 * (controller_buttons[6] - controller_buttons[7]);
+    // }
 
     while (true)
     {
@@ -421,8 +423,8 @@ int Simulator::teleop_grasp_step()
             return 2;
         }
     }
-    object_position[0] += 0.05 * controller_axes[1];
-    object_position[1] += 0.05 * controller_axes[0];
+    object_position_estimate[0] += 0.05 * controller_axes[1];
+    object_position_estimate[1] += 0.05 * controller_axes[0];
     control_vec[0] = (controller_buttons[6] - controller_buttons[7]);
     control_vec[1] = controller_axes[3];
     control_vec[2] = -controller_axes[2];
@@ -475,8 +477,8 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
         spherical_position = cartesian_to_spherical(rel_cart_pos);
     }
 
-    // pose_msg = get_pose(object_position, getToolPosition(current_joint_angles, total_joints));
-    pose_msg = get_pose(object_position, kinematic_state->getGlobalLinkTransform(tool_link).translation());
+    // pose_msg = get_pose(object_position_estimate, getToolPosition(current_joint_angles, total_joints));
+    pose_msg = get_pose(object_position_estimate, kinematic_state->getGlobalLinkTransform(tool_link).translation());
     // cout << pose_msg << endl;
     bool found_ik = kinematic_state->setFromIK(joint_model_group, pose_msg, tool_link, 1, 0.05);
     if (found_ik)
@@ -500,8 +502,8 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
          << spherical_position << "\n***********" << endl;
 
     rel_cart_pos = spherical_to_cartesian(spherical_position);
-    cart_pos = rel_cart_pos + object_position;
-    pose_msg = get_pose(object_position, rel_cart_pos + object_position);
+    cart_pos = rel_cart_pos + object_position_estimate;
+    pose_msg = get_pose(object_position_estimate, rel_cart_pos + object_position_estimate);
     // cout << pose_msg << endl;
     found_ik = kinematic_state->setFromIK(joint_model_group, pose_msg, tool_link, 1, 0.05);
     if (found_ik)
@@ -532,13 +534,14 @@ void Simulator::teleop_servo()
     vector<string> object_ids;
     vector<double> joints;
     int c;
+    Eigen::Vector3d tool_position;
     object_ids.resize(1);
     teleop_move = false;
     const std::string PLANNING_GROUP = "arm";
     goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
     move_group.setJointValueTarget(goal_joint_angles);
-    cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nMoving to initial position..\n";
-    move_group.move();
+    // cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nMoving to initial position..\n";
+    // move_group.move();
     cout << "Ready to teleop.\n";
 
     while (true)
@@ -629,7 +632,7 @@ int Simulator::teleop_servo_step()
         vector<string> object_ids;
         object_ids.resize(1);
         object_ids[0] = current_grasping_objects[0].id;
-        planning_scene_interface.removeCollisionObjects(object_ids);
+        // planning_scene_interface.removeCollisionObjects(object_ids);
         return 0;
     }
     Eigen::Vector3d control_vec;
@@ -703,7 +706,10 @@ main(int argc, char *argv[])
     ros::AsyncSpinner spinner(0);
     spinner.start();
     Simulator Sim(nh_);
-    // Sim.teleop_grasp();
-    Sim.teleop_servo();
+    while (true)
+    {
+        Sim.teleop_servo();
+        Sim.teleop_grasp();
+    }
     return EXIT_SUCCESS;
 }
