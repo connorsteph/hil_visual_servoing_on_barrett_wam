@@ -304,7 +304,7 @@ void Simulator::teleop_grasp()
             switch (c)
             {
             case 0:
-                cout << "Case 0 - finishing\n";
+                // cout << "Case 0 - finishing\n";
                 teleop_move = false;
                 return;
             case 2:

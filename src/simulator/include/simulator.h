@@ -30,7 +30,7 @@ class Simulator
   public:
     string tool_link = "wam/wrist_palm_stump_link";
     ofstream grasp_data;
-    string file_directory = "/home/cjs/ros_workspaces/wam_sim_bak/";
+    string file_directory = "/home/froglake/wam_sim_bak/";
     string file_name;
     double task_time;
     ros::WallTime start;
@@ -124,6 +124,12 @@ class Simulator
             }
             else
             {
+                if ( (controller_buttons[8] == 1) && (temp_controller_buttons[8]==1))
+                {
+                    ros::WallDuration(0.1).sleep();
+                    controller_buttons[8] = 0;
+                    return;
+                }
                 controller_axes = temp_controller_axes;
                 controller_buttons = temp_controller_buttons;
                 teleop_move = true;
