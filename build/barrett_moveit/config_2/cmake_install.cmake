@@ -1,8 +1,8 @@
-# Install script for directory: /home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/config_2
+# Install script for directory: /home/froglake/wam_sim_bak/src/barrett_moveit/config_2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/cjs/ros_workspaces/wam_sim_bak/install")
+  set(CMAKE_INSTALL_PREFIX "/home/froglake/wam_sim_bak/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,31 +32,26 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-# Is this installation the result of a crosscompile?
-if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "FALSE")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/froglake/wam_sim_bak/build/barrett_moveit/config_2/catkin_generated/installspace/config_2.pc")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/config_2/catkin_generated/installspace/config_2.pc")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2/cmake" TYPE FILE FILES
-    "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/config_2/catkin_generated/installspace/config_2Config.cmake"
-    "/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/config_2/catkin_generated/installspace/config_2Config-version.cmake"
+    "/home/froglake/wam_sim_bak/build/barrett_moveit/config_2/catkin_generated/installspace/config_2Config.cmake"
+    "/home/froglake/wam_sim_bak/build/barrett_moveit/config_2/catkin_generated/installspace/config_2Config-version.cmake"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2" TYPE FILE FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/config_2/package.xml")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2" TYPE FILE FILES "/home/froglake/wam_sim_bak/src/barrett_moveit/config_2/package.xml")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2" TYPE DIRECTORY FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/config_2/launch" REGEX "/setup\\_assistant\\.launch$" EXCLUDE)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2" TYPE DIRECTORY FILES "/home/froglake/wam_sim_bak/src/barrett_moveit/config_2/launch" REGEX "/setup\\_assistant\\.launch$" EXCLUDE)
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2" TYPE DIRECTORY FILES "/home/cjs/ros_workspaces/wam_sim_bak/src/barrett_moveit/config_2/config")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/config_2" TYPE DIRECTORY FILES "/home/froglake/wam_sim_bak/src/barrett_moveit/config_2/config")
 endif()
 

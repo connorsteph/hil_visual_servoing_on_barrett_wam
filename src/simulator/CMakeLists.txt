@@ -16,11 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 
-find_package(Eigen3 REQUIRED)
+find_package(Eigen REQUIRED)
 
-add_message_files(
-  FILES
-)
 
 generate_messages(
   DEPENDENCIES

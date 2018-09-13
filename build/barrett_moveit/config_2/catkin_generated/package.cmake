@@ -10,7 +10,4 @@ set(config_2_EXEC_DEPENDS "moveit_ros_move_group" "moveit_fake_controller_manage
 set(config_2_RUN_DEPENDS "moveit_ros_move_group" "moveit_fake_controller_manager" "moveit_kinematics" "moveit_planners_ompl" "moveit_ros_visualization" "joint_state_publisher" "robot_state_publisher" "xacro" "barrett_model")
 set(config_2_TEST_DEPENDS )
 set(config_2_DOC_DEPENDS )
-set(config_2_URL_WEBSITE "http://moveit.ros.org/")
-set(config_2_URL_BUGTRACKER "https://github.com/ros-planning/moveit/issues")
-set(config_2_URL_REPOSITORY "https://github.com/ros-planning/moveit")
 set(config_2_DEPRECATED "")

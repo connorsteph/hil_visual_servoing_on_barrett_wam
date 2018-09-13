@@ -10,7 +10,4 @@ set(simulator_EXEC_DEPENDS "moveit_ros_move_group" "message_runtime" "moveit_pla
 set(simulator_RUN_DEPENDS "moveit_ros_move_group" "message_runtime" "moveit_planners_ompl" "moveit_ros_visualization" "joint_state_publisher" "robot_state_publisher" "xacro" "barrett_model" "barrett_moveit")
 set(simulator_TEST_DEPENDS )
 set(simulator_DOC_DEPENDS )
-set(simulator_URL_WEBSITE "")
-set(simulator_URL_BUGTRACKER "")
-set(simulator_URL_REPOSITORY "")
 set(simulator_DEPRECATED "")

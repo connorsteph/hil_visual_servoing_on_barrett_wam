@@ -1,8 +1,8 @@
-prefix=/home/cjs/ros_workspaces/wam_sim_bak/devel
+prefix=/home/froglake/wam_sim_bak/devel
 
 Name: simulator
 Description: Description of simulator
 Version: 0.1.0
-Cflags: -I/home/cjs/ros_workspaces/wam_sim_bak/src/simulator/include
-Libs: -L/home/cjs/ros_workspaces/wam_sim_bak/devel/lib 
+Cflags: -I/home/froglake/wam_sim_bak/src/simulator/include
+Libs: -L/home/froglake/wam_sim_bak/devel/lib 
 Requires: message_runtime
