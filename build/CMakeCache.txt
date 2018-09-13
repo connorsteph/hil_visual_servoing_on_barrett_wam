@@ -297,6 +297,12 @@ config_4_BINARY_DIR:STATIC=/home/froglake/wam_sim_bak/build/barrett_moveit/confi
 //Value Computed by CMake
 config_4_SOURCE_DIR:STATIC=/home/froglake/wam_sim_bak/src/barrett_moveit/config_4
 
+//Value Computed by CMake
+config_xenial_perturb_BINARY_DIR:STATIC=/home/froglake/wam_sim_bak/build/barrett_moveit/config_xenial_perturb
+
+//Value Computed by CMake
+config_xenial_perturb_SOURCE_DIR:STATIC=/home/froglake/wam_sim_bak/src/barrett_moveit/config_xenial_perturb
+
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/indigo/share/cpp_common/cmake
 
@@ -570,7 +576,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=7
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

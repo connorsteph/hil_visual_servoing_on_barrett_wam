@@ -1,2 +1,2 @@
-barrett_model:barrett_moveit/barrett_wam_moveit_config:barrett_moveit/config_2:barrett_moveit/config_4:simulator
+barrett_model:barrett_moveit/barrett_wam_moveit_config:barrett_moveit/config_2:barrett_moveit/config_4:barrett_moveit/config_xenial_perturb:simulator
 -DCATKIN_DEVEL_PREFIX=/home/froglake/wam_sim_bak/devel -DCMAKE_INSTALL_PREFIX=/home/froglake/wam_sim_bak/install -G Unix Makefiles

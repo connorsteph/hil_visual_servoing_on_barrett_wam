@@ -592,7 +592,7 @@ int Simulator::teleop_servo_step()
         return 0;
     }
     default_random_engine generator;
-    normal_distribution<double> distribution(0.0, .5);
+    normal_distribution<double> distribution(0.0, 0.5);
     Eigen::VectorXd rand1(7);
     Eigen::VectorXd rand2(3);
     Eigen::Vector3d control_vec;
