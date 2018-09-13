@@ -118,6 +118,7 @@ class Simulator
                 if (!grasping)
                 {
                     controller_axes = temp_controller_axes;
+                    controller_buttons = temp_controller_buttons;
                     next_object = true;
                 }
             }
