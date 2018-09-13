@@ -210,7 +210,7 @@ Simulator::Simulator(ros::NodeHandle nh_)
     current_grasping_objects.resize(1);
     current_grasping_objects[0] = grasping_objects[object_idx];
     planning_scene_interface.applyCollisionObjects(current_grasping_objects);
-    planning_scene_interface.applyCollisionObjects(table);
+    // planning_scene_interface.applyCollisionObjects(table);
     double x = grasping_objects[0].primitive_poses[0].position.x;
     double y = grasping_objects[0].primitive_poses[0].position.y;
     double z = grasping_objects[0].primitive_poses[0].position.z;
@@ -487,8 +487,8 @@ void Simulator::teleop_servo()
     vector<string> object_ids;
     vector<double> joints;
     int c;
-    command_count = 0;
-    start = ros::WallTime::now();
+    // command_count = 0;
+    // start = ros::WallTime::now();
     Eigen::Vector3d tool_position;
     object_ids.resize(1);
     teleop_move = false;
@@ -504,7 +504,7 @@ void Simulator::teleop_servo()
         ros::Rate(30).sleep();
         if (next_object)
         {
-            if (command_count < 5)
+            if (command_count > 5)
             {
                 cout << "Finished on move " << command_count << ".\n";
                 task_time = (ros::WallTime::now() - start).toSec();
