@@ -209,7 +209,7 @@ Simulator::Simulator(ros::NodeHandle nh_)
     current_grasping_objects.resize(1);
     current_grasping_objects[0] = grasping_objects[object_idx];
     planning_scene_interface.applyCollisionObjects(current_grasping_objects);
-    planning_scene_interface.applyCollisionObjects(table, table_color);
+    planning_scene_interface.applyCollisionObjects(table);
     double x = grasping_objects[0].primitive_poses[0].position.x;
     double y = grasping_objects[0].primitive_poses[0].position.y;
     double z = grasping_objects[0].primitive_poses[0].position.z;
@@ -268,10 +268,10 @@ void Simulator::teleop_grasp()
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     teleop_move = false;
     const std::string PLANNING_GROUP = "arm";
-    moveit::planning_interface::MoveGroupInterface move_group(PLANNING_GROUP);
+    moveit::planning_interface::MoveGroup move_group(PLANNING_GROUP);
     const robot_state::JointModelGroup *joint_model_group = move_group.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
     const std::vector<std::string> &joint_names = joint_model_group->getVariableNames();
-    moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+    moveit::planning_interface::MoveGroup::Plan my_plan;
     Eigen::Vector3d tool_position = move_group.getCurrentState()->getGlobalLinkTransform(tool_link).translation();
     spherical_position = cartesian_to_spherical(tool_position - object_position_estimate);
     vector<double> joints;
@@ -526,7 +526,7 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
 
 void Simulator::teleop_servo()
 {
-    moveit::planning_interface::MoveGroupInterface move_group(PLANNING_GROUP);
+    moveit::planning_interface::MoveGroup move_group(PLANNING_GROUP);
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     const robot_state::JointModelGroup *joint_model_group = move_group.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
     planning_scene_interface.removeCollisionObjects(grasping_object_ids);
