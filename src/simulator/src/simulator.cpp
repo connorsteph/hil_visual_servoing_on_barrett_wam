@@ -188,11 +188,15 @@ void Simulator::setCollisionObjects()
     grasping_objects[9].primitive_poses[0].position.y = 0.0;
     grasping_objects[9].primitive_poses[0].position.z = 1.25;
     grasping_objects[9].operation = grasping_objects[9].ADD;
+    grasping_object_ids.resize(10);
+    for (int i = 0; i < 10; ++i)
+    {
+        grasping_object_ids[i] = grasping_objects[i].id;
+    }
 }
 
 Simulator::Simulator(ros::NodeHandle nh_)
 {
-    command_count = 0;
     object_idx = 0;
     joy_sub = nh_.subscribe("/joy", 1, &Simulator::joy_cb, this);
     pub_joint_state = nh_.advertise<sensor_msgs::JointState>("/joint_states", 1);
@@ -254,7 +258,7 @@ Simulator::~Simulator()
     vector<string> object_ids;
     object_ids.resize(1);
     object_ids[0] = current_grasping_objects[0].id;
-    planning_scene_interface.removeCollisionObjects(object_ids);
+    planning_scene_interface.removeCollisionObjects(grasping_object_ids);
     object_ids[0] = table[0].id;
     planning_scene_interface.removeCollisionObjects(object_ids);
 }
@@ -291,58 +295,47 @@ void Simulator::teleop_grasp()
     while (true)
     {
         ros::Rate(30).sleep();
-        if (next_object)
-        {
-            if (command_count < 5)
-            {
-                cout << "Finished on move " << command_count << ".\n";
-                grasp_data.open(file_directory + file_name, ios::app);
-                if (grasp_data.is_open())
-                {
-                    cout << "Logging to " << file_directory + file_name << endl;
-                    grasp_data << object_idx << " " << command_count << endl;
-                    grasp_data.close();
-                };
-            }
+        // if (next_object)
+        // {
 
-            int idx;
-            if (controller_axes[4] < 0)
-            {
-                object_idx = (object_idx + 1) % grasping_objects.size();
-            }
-            else
-            {
-                if (object_idx > 0)
-                {
-                    --object_idx;
-                }
-                else
-                {
-                    object_idx = grasping_objects.size() - 1;
-                }
-            }
-            cout << "Switching to object " << object_idx + 1 << " - resetting" << endl;
-            vector<string> object_ids;
-            object_ids.resize(1);
-            object_ids[0] = current_grasping_objects[0].id;
-            planning_scene_interface.removeCollisionObjects(object_ids);
-            current_grasping_objects[0] = grasping_objects[object_idx];
-            planning_scene_interface.applyCollisionObjects(current_grasping_objects);
-            command_count = 0;
-            goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
-            spherical_position = {0.4, M_PI / 6.0, M_PI};
-            double x = grasping_objects[object_idx].primitive_poses[0].position.x;
-            double y = grasping_objects[object_idx].primitive_poses[0].position.y;
-            double z = grasping_objects[object_idx].primitive_poses[0].position.z;
-            object_position << x, y, z;
-            yaw_offset = 0.0;
-            move_group.setJointValueTarget(goal_joint_angles);
-            move_group.plan(my_plan);
-            move_group.move();
-            cout << "Reset complete.\n";
-            cout << "Ready to teleop.\n";
-            next_object = false;
-        }
+        //     int idx;
+        //     if (controller_axes[4] < 0)
+        //     {
+        //         object_idx = (object_idx + 1) % grasping_objects.size();
+        //     }
+        //     else
+        //     {
+        //         if (object_idx > 0)
+        //         {
+        //             --object_idx;
+        //         }
+        //         else
+        //         {
+        //             object_idx = grasping_objects.size() - 1;
+        //         }
+        //     }
+        //     cout << "Switching to object " << object_idx + 1 << " - resetting" << endl;
+        //     vector<string> object_ids;
+        //     object_ids.resize(1);
+        //     object_ids[0] = current_grasping_objects[0].id;
+        //     planning_scene_interface.removeCollisionObjects(grasping_object_ids);
+        //     current_grasping_objects[0] = grasping_objects[object_idx];
+        //     planning_scene_interface.applyCollisionObjects(current_grasping_objects);
+        //     command_count = 0;
+        //     goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
+        //     spherical_position = {0.4, M_PI / 6.0, M_PI};
+        //     double x = grasping_objects[object_idx].primitive_poses[0].position.x;
+        //     double y = grasping_objects[object_idx].primitive_poses[0].position.y;
+        //     double z = grasping_objects[object_idx].primitive_poses[0].position.z;
+        //     object_position << x, y, z;
+        //     yaw_offset = 0.0;
+        //     move_group.setJointValueTarget(goal_joint_angles);
+        //     move_group.plan(my_plan);
+        //     move_group.move();
+        //     cout << "Reset complete.\n";
+        //     cout << "Ready to teleop.\n";
+        //     next_object = false;
+        // }
         if (teleop_move)
         {
             cout << "Command number: " << ++command_count << endl;
@@ -360,7 +353,7 @@ void Simulator::teleop_grasp()
             switch (c)
             {
             case 0:
-                cout << "Case 0 - finishing\n";
+                // cout << "Case 0 - finishing\n";
                 return;
             case 2:
                 teleop_move = false;
@@ -375,12 +368,14 @@ int Simulator::teleop_grasp_step()
     Eigen::VectorXd control_vec(4);
     if (controller_buttons[8])
     {
-        cout << "User quit teleop. Exiting.." << endl;
+        cout << "Ending grasping control on move " << command_count << endl;
         moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
         vector<string> object_ids;
         object_ids.resize(1);
         object_ids[0] = current_grasping_objects[0].id;
-        planning_scene_interface.removeCollisionObjects(object_ids);
+        // planning_scene_interface.removeCollisionObjects(grasping_object_ids);
+        cout << "Switching to reaching control . . .\n"
+             << endl;
         return 0;
     }
     if (controller_buttons[3])
@@ -466,6 +461,8 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     Eigen::Vector3d axis;
     Eigen::VectorXd gains(6);
     vector<double> joints;
+    Eigen::Vector3d temp_spherical_position;
+    temp_spherical_position = spherical_position;
     spherical_position[0] += 0.05 * control_vec[0];
     rel_cart_pos = spherical_to_cartesian(spherical_position);
     if (abs(control_vec[1]) > 0 || abs(control_vec[2]) > 0)
@@ -493,13 +490,13 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     }
     else
     {
-        cout << "IK problem" << endl;
-        // yaw_offset = 0.0;
+        cout << "IK error, yaw offset reset." << endl;
+        yaw_offset = 0.0;
     }
     yaw_offset += 2.0 * delta_radians * control_vec[3];
-    cout << "yaw offset: " << yaw_offset << endl;
-    cout << "Spherical position: \n**************\n"
-         << spherical_position << "\n***********" << endl;
+    // cout << "yaw offset: " << yaw_offset << endl;
+    // cout << "Spherical position: \n**************\n"
+    //      << spherical_position << "\n***********" << endl;
 
     rel_cart_pos = spherical_to_cartesian(spherical_position);
     cart_pos = rel_cart_pos + object_position_estimate;
@@ -518,6 +515,7 @@ bool Simulator::sphere_move(const Eigen::VectorXd &control_vec)
     else
     {
         ROS_INFO("Did not find IK solution with yaw.");
+        spherical_position = temp_spherical_position;
         for (int i = 0; i < goal_joint_angles.size(); ++i)
         {
             goal_joint_angles[i] = current_joint_angles[i];
@@ -531,9 +529,15 @@ void Simulator::teleop_servo()
     moveit::planning_interface::MoveGroupInterface move_group(PLANNING_GROUP);
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     const robot_state::JointModelGroup *joint_model_group = move_group.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
+    planning_scene_interface.removeCollisionObjects(grasping_object_ids);
+    current_grasping_objects[0] = grasping_objects[object_idx];
+    // current_grasping_objects[0] = grasping_objects[object_idx];
+    planning_scene_interface.applyCollisionObjects(current_grasping_objects);
     vector<string> object_ids;
     vector<double> joints;
     int c;
+    command_count = 0;
+    start = ros::WallTime::now();
     Eigen::Vector3d tool_position;
     object_ids.resize(1);
     teleop_move = false;
@@ -542,7 +546,7 @@ void Simulator::teleop_servo()
     move_group.setJointValueTarget(goal_joint_angles);
     // cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nMoving to initial position..\n";
     // move_group.move();
-    cout << "Ready to teleop.\n";
+    cout << "\n\n***********************\nReady to teleop.\n";
 
     while (true)
     {
@@ -556,11 +560,10 @@ void Simulator::teleop_servo()
                 if (grasp_data.is_open())
                 {
                     cout << "Logging to " << file_directory + file_name << endl;
-                    grasp_data << object_idx << " " << command_count << endl;
+                    grasp_data << object_idx << " " << command_count << " " << task_time << endl;
                     grasp_data.close();
                 }
             }
-
             int idx;
             if (controller_axes[4] < 0)
             {
@@ -579,10 +582,11 @@ void Simulator::teleop_servo()
             }
             cout << "Switching to object " << object_idx + 1 << " - resetting" << endl;
             object_ids[0] = current_grasping_objects[0].id;
-            planning_scene_interface.removeCollisionObjects(object_ids);
+            planning_scene_interface.removeCollisionObjects(grasping_object_ids);
             current_grasping_objects[0] = grasping_objects[object_idx];
             planning_scene_interface.applyCollisionObjects(current_grasping_objects);
             command_count = 0;
+            start = ros::WallTime::now();
             goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
             move_group.setJointValueTarget(goal_joint_angles);
             // move_group.plan(my_plan);
@@ -613,7 +617,7 @@ void Simulator::teleop_servo()
             switch (c)
             {
             case 0:
-                cout << "Case 0 - finishing\n";
+                // cout << "Case 0 - finishing\n";
                 return;
             case 2:
                 teleop_move = false;
@@ -627,12 +631,14 @@ int Simulator::teleop_servo_step()
 {
     if (controller_buttons[8])
     {
-        cout << "User quit teleop. Exiting.." << endl;
+        task_time = (ros::WallTime::now() - start).toSec();
+        cout << "Task time: " << task_time << endl;
+        cout << "Switching to grasping controls . . ." << endl;
         moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
         vector<string> object_ids;
         object_ids.resize(1);
         object_ids[0] = current_grasping_objects[0].id;
-        // planning_scene_interface.removeCollisionObjects(object_ids);
+        // planning_scene_interface.removeCollisionObjects(grasping_object_ids);
         return 0;
     }
     Eigen::Vector3d control_vec;
@@ -657,6 +663,8 @@ int Simulator::teleop_servo_step()
     {
         cout << "Resetting to initial position" << endl;
         goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
+        command_count = 0;
+        start = ros::WallTime::now();
         return 2;
     }
     kinematic_state->setJointGroupPositions(joint_model_group, current_joint_angles);
@@ -664,7 +672,6 @@ int Simulator::teleop_servo_step()
     kinematic_state->getJacobian(joint_model_group, joint_model_group->getLinkModel(tool_link), reference_point_position, jacobian);
     lin_jacobian = jacobian.block(0, 0, 3, 7);
     error_vec = -(tool_position - object_position);
-    // cout << error_vec << endl;
     pseudoInverse(lin_jacobian, jacobian_inv);
     dq = jacobian_inv * error_vec;
     joint_positions.resize(7);
@@ -674,7 +681,7 @@ int Simulator::teleop_servo_step()
     }
     kinematic_state->setJointGroupPositions(joint_model_group, joint_positions);
     object_position_estimate = kinematic_state->getGlobalLinkTransform(tool_link).translation();
-    cout << object_position - object_position_estimate << endl;
+    // cout << object_position - object_position_estimate << endl;
     for (int i = 0; i < joint_positions.size(); ++i)
     {
         joint_positions[i] = current_joint_angles[i] + 0.1 * dq[i];
@@ -688,9 +695,8 @@ int Simulator::teleop_servo_step()
     motion_vectors.col(0) = jacobian_inv * dx0;
     motion_vectors.col(1) = jacobian_inv * dx1;
     motion_vectors.col(2) = jacobian_inv * dx2;
-    cout << "Control vec: " << control_vec << endl;
+    // cout << "Control vec: " << control_vec << endl;
     delta_joint_angles = motion_vectors.col(0) * control_vec[1] + motion_vectors.col(1) * control_vec[2] - 0.1 * dq * control_vec[0];
-    // delta_joint_angles = 0.1 * dq;
     for (int i = 0; i < goal_joint_angles.size(); ++i)
     {
         goal_joint_angles[i] = delta_joint_angles[i] + current_joint_angles[i];

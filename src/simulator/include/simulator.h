@@ -32,6 +32,9 @@ class Simulator
     ofstream grasp_data;
     string file_directory = "/home/cjs/ros_workspaces/wam_sim_bak/";
     string file_name;
+    double task_time;
+    ros::WallTime start;
+    bool grasping = false;
     bool teleop_move = false;
     bool next_object = false;
     bool is_spread;
@@ -45,6 +48,7 @@ class Simulator
     std::vector<moveit_msgs::CollisionObject> grasping_objects;
     std::vector<moveit_msgs::CollisionObject> current_grasping_objects;
     std::vector<moveit_msgs::CollisionObject> table;
+    vector<string> grasping_object_ids;
     vector<moveit_msgs::ObjectColor> table_color;
     std::vector<float> controller_axes;
     std::vector<int> controller_buttons;
@@ -110,8 +114,12 @@ class Simulator
         {
             if (abs(temp_controller_axes[4]) == 1.0)
             {
-                controller_axes = temp_controller_axes;
-                next_object = true;
+
+                if (!grasping)
+                {
+                    controller_axes = temp_controller_axes;
+                    next_object = true;
+                }
             }
             else
             {

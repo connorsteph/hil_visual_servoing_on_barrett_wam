@@ -35,7 +35,8 @@
         "deque": "cpp",
         "thread": "cpp",
         "complex": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "core": "cpp"
     },
     "ros.distro": "melodic",
     "python.autoComplete.extraPaths": [
