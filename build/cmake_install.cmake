@@ -125,6 +125,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_model/cmake_install.cmake")
   include("/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/barrett_wam_moveit_config/cmake_install.cmake")
   include("/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/config_2/cmake_install.cmake")
+  include("/home/cjs/ros_workspaces/wam_sim_bak/build/barrett_moveit/config_4/cmake_install.cmake")
   include("/home/cjs/ros_workspaces/wam_sim_bak/build/simulator/cmake_install.cmake")
 
 endif()

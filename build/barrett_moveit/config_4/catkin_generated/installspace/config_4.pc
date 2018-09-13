@@ -1,0 +1,8 @@
+prefix=/home/cjs/ros_workspaces/wam_sim_bak/install
+
+Name: config_4
+Description: Description of config_4
+Version: 0.3.0
+Cflags: 
+Libs: -L/home/cjs/ros_workspaces/wam_sim_bak/install/lib 
+Requires: 

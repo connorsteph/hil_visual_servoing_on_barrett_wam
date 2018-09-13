@@ -28,6 +28,7 @@ using namespace std;
 class Simulator
 {
   public:
+    string tool_link = "wam/wrist_palm_stump_link";
     ofstream grasp_data;
     string file_directory = "/home/cjs/ros_workspaces/wam_sim_bak/";
     string file_name;
@@ -50,7 +51,8 @@ class Simulator
     const int total_joints = 7;
     std::vector<bool> active_buttons_map = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0};
     std::vector<bool> active_axes_map = {1, 1, 1, 1, 1, 0};
-    Eigen::Vector3d object_position = {0.8, 0.3, 1.2};
+    Eigen::Vector3d object_position;
+    Eigen::Vector3d object_position_estimate;
     Eigen::Vector3d spherical_position{0.4, M_PI / 6.0, M_PI}; // r, theta, phi
     Eigen::Matrix<double, 7, 1> current_joint_angles;
     vector<double> goal_joint_angles;
@@ -65,6 +67,9 @@ class Simulator
     bool sphere_move(const Eigen::VectorXd &control_vec);
     void teleop_grasp();
     int teleop_grasp_step();
+    void teleop_servo();
+    int teleop_servo_step();
+    Eigen::VectorXd calc_step(Eigen::MatrixXd &jacobian, Eigen::VectorXd &error_vec);
 
   private:
     ros::Subscriber joy_sub;

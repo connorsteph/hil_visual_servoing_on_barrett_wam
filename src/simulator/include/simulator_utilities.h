@@ -150,3 +150,22 @@ Eigen::Vector3d getToolPosition(const Eigen::VectorXd &joint_positions, int dof)
     tool_pos[2] += 1.0;
     return tool_pos;
 }
+
+template <typename _Matrix_Type_>
+bool pseudoInverse(const _Matrix_Type_ &a, _Matrix_Type_ &result, double epsilon = std::numeric_limits<typename _Matrix_Type_::Scalar>::epsilon())
+{
+    double max = 40.0;
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd = a.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV);
+    Eigen::VectorXd singular_values = svd.singularValues();
+    double cond = (singular_values(0) / singular_values(singular_values.size() - 1));
+    if (cond > max)
+    {
+        singular_values(singular_values.size() - 1) = 0;
+        double cond = (singular_values(0) / singular_values(singular_values.size() - 2));
+        // std::cout << "condition number failed, setting smallest singular value to 0" << std::endl;
+    }
+    typename _Matrix_Type_::Scalar tolerance = epsilon * std::max(a.cols(), a.rows()) * singular_values.array().abs().maxCoeff();
+    result = svd.matrixV() * _Matrix_Type_((singular_values.array().abs() > tolerance).select(singular_values.array().inverse(), 0)).asDiagonal() *
+             svd.matrixU().adjoint();
+    return true;
+}

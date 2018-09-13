@@ -18,6 +18,7 @@
         <joint name="wam/wrist_yaw_joint" />
         <joint name="wam/wrist_pitch_joint" />
         <joint name="wam/palm_yaw_joint" />
+        <joint name="wam/wrist_palm_stump_joint" />
     </group>
     <group name="hand">
         <joint name="wam/bhand/bhand_base_joint" />
