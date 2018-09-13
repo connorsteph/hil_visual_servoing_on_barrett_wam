@@ -591,6 +591,10 @@ int Simulator::teleop_servo_step()
         controller_buttons = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         return 0;
     }
+    default_random_engine generator;
+    normal_distribution<double> distribution(0.0, .5);
+    Eigen::VectorXd rand1(7);
+    Eigen::VectorXd rand2(3);
     Eigen::Vector3d control_vec;
     const robot_state::JointModelGroup *joint_model_group = kinematic_model->getJointModelGroup(PLANNING_GROUP);
     const std::vector<std::string> &joint_names = joint_model_group->getVariableNames();
@@ -621,6 +625,7 @@ int Simulator::teleop_servo_step()
     tool_position = kinematic_state->getGlobalLinkTransform(tool_link).translation();
     kinematic_state->getJacobian(joint_model_group, joint_model_group->getLinkModel(tool_link), reference_point_position, jacobian);
     lin_jacobian = jacobian.block(0, 0, 3, 7);
+    lin_jacobian += rand2 * rand1.transpose();
     error_vec = -(tool_position - object_position);
     pseudoInverse(lin_jacobian, jacobian_inv);
     dq = jacobian_inv * error_vec;
