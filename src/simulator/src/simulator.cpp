@@ -544,8 +544,8 @@ void Simulator::teleop_servo()
     const std::string PLANNING_GROUP = "arm";
     goal_joint_angles = {0, 0, 0, 1.8, 0, 0, 0};
     move_group.setJointValueTarget(goal_joint_angles);
-    // cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nMoving to initial position..\n";
-    // move_group.move();
+    cout << "Moving to initial position..\n";
+    move_group.move();
     cout << "\n\n***********************\nReady to teleop.\n";
 
     while (true)
@@ -629,6 +629,18 @@ void Simulator::teleop_servo()
 
 int Simulator::teleop_servo_step()
 {
+    default_random_engine generator;
+    normal_distribution<double> distribution(0.0, .5);
+    Eigen::VectorXd rand1(7);
+    Eigen::VectorXd rand2(3);
+    for (int i = 0; i < 7; ++i)
+    {
+        rand1[i] = distribution(generator);
+    }
+    for (int i = 0; i < 3; ++i)
+    {
+        rand2[i] = distribution(generator);
+    }
     if (controller_buttons[8])
     {
         task_time = (ros::WallTime::now() - start).toSec();
@@ -671,6 +683,7 @@ int Simulator::teleop_servo_step()
     tool_position = kinematic_state->getGlobalLinkTransform(tool_link).translation();
     kinematic_state->getJacobian(joint_model_group, joint_model_group->getLinkModel(tool_link), reference_point_position, jacobian);
     lin_jacobian = jacobian.block(0, 0, 3, 7);
+    lin_jacobian += rand2 * rand1.transpose();
     error_vec = -(tool_position - object_position);
     pseudoInverse(lin_jacobian, jacobian_inv);
     dq = jacobian_inv * error_vec;
