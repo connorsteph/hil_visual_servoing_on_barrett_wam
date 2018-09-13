@@ -3,12 +3,10 @@
 #include <ros/ros.h>
 #include <iostream>
 #include <cmath>
+#include <fstream>
+#include <random>
 #include <Eigen/Dense>
-#include "sensor_msgs/JointState.h"
 #include "sensor_msgs/Joy.h"
-// #include "geometry_msgs/PoseStamped.h"
-// #include "geometry_msgs/Point.h"
-#include "geometry_msgs/PoseStamped.h"
 #include "sensor_msgs/JointState.h"
 
 // MoveIt!
@@ -30,6 +28,9 @@ using namespace std;
 class Simulator
 {
   public:
+    ofstream grasp_data;
+    string file_directory = "/home/cjs/ros_workspaces/wam_sim_bak/";
+    string file_name;
     bool teleop_move = false;
     bool next_object = false;
     bool is_spread;
@@ -103,7 +104,7 @@ class Simulator
         if (sentinel)
         {
             if (abs(temp_controller_axes[4]) == 1.0)
-            {   
+            {
                 controller_axes = temp_controller_axes;
                 next_object = true;
             }
